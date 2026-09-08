@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ShopFront — a responsive e-commerce storefront demo with catalog, cart, and checkout." />
+  <title>ShopFront · Online Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#" data-view="shop">Shop<span>Front</span></a>
+      <div class="header-search">
+        <label class="sr-only" for="search-input">Search products</label>
+        <input id="search-input" type="search" placeholder="Search products…" autocomplete="off" />
+      </div>
+      <nav class="header-actions" aria-label="Store">
+        <button type="button" class="icon-btn" id="cart-toggle" aria-label="Open cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <path d="M6 6h15l-1.5 9h-12z" />
+            <circle cx="9" cy="20" r="1.5" />
+            <circle cx="18" cy="20" r="1.5" />
+            <path d="M6 6L5 3H2" />
+          </svg>
+          <span class="badge" id="cart-count" hidden>0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero-banner">
+      <div class="container hero-banner-inner">
+        <div>
+          <p class="eyebrow">Curated everyday essentials</p>
+          <h1>Shop smarter. Look sharper.</h1>
+          <p class="hero-text">Browse a demo catalog of apparel, gadgets, and home goods. Add items to your cart and walk through a mock checkout — no real payments.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="shop-layout container" id="shop-view">
+      <aside class="filters" aria-label="Filters">
+        <h2 class="filters-title">Categories</h2>
+        <div class="chip-group" id="category-filters" role="group" aria-label="Product categories"></div>
+        <h2 class="filters-title">Sort</h2>
+        <label class="sr-only" for="sort-select">Sort products</label>
+        <select id="sort-select">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name">Name A–Z</option>
+        </select>
+        <p class="result-count" id="result-count"></p>
+      </aside>
+
+      <div class="catalog">
+        <div class="product-grid" id="product-grid"></div>
+        <p class="empty-state" id="empty-catalog" hidden>No products match your filters.</p>
+      </div>
+    </section>
+
+    <section class="checkout-view container" id="checkout-view" hidden>
+      <button type="button" class="link-back" id="back-to-shop">&larr; Continue shopping</button>
+      <h1>Checkout</h1>
+      <div class="checkout-grid">
+        <form class="checkout-form" id="checkout-form" novalidate>
+          <fieldset>
+            <legend>Contact</legend>
+            <div class="field">
+              <label for="full-name">Full name</label>
+              <input id="full-name" name="fullName" type="text" required autocomplete="name" />
+              <span class="field-error" data-for="fullName"></span>
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="email" />
+              <span class="field-error" data-for="email"></span>
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" required autocomplete="tel" />
+              <span class="field-error" data-for="phone"></span>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Shipping address</legend>
+            <div class="field">
+              <label for="address">Street address</label>
+              <input id="address" name="address" type="text" required autocomplete="street-address" />
+              <span class="field-error" data-for="address"></span>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="city">City</label>
+                <input id="city" name="city" type="text" required autocomplete="address-level2" />
+                <span class="field-error" data-for="city"></span>
+              </div>
+              <div class="field">
+                <label for="state">State</label>
+                <input id="state" name="state" type="text" required autocomplete="address-level1" />
+                <span class="field-error" data-for="state"></span>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="zip">Postal code</label>
+                <input id="zip" name="zip" type="text" required autocomplete="postal-code" />
+                <span class="field-error" data-for="zip"></span>
+              </div>
+              <div class="field">
+                <label for="country">Country</label>
+                <input id="country" name="country" type="text" required autocomplete="country-name" value="Nigeria" />
+                <span class="field-error" data-for="country"></span>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Payment (demo)</legend>
+            <p class="hint">This is a UI demo — no card data is sent or charged.</p>
+            <div class="field">
+              <label for="card-name">Name on card</label>
+              <input id="card-name" name="cardName" type="text" required autocomplete="cc-name" />
+              <span class="field-error" data-for="cardName"></span>
+            </div>
+            <div class="field">
+              <label for="card-number">Card number</label>
+              <input id="card-number" name="cardNumber" type="text" inputmode="numeric" required placeholder="4242 4242 4242 4242" autocomplete="cc-number" />
+              <span class="field-error" data-for="cardNumber"></span>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="card-expiry">Expiry (MM/YY)</label>
+                <input id="card-expiry" name="cardExpiry" type="text" required placeholder="12/28" autocomplete="cc-exp" />
+                <span class="field-error" data-for="cardExpiry"></span>
+              </div>
+              <div class="field">
+                <label for="card-cvc">CVC</label>
+                <input id="card-cvc" name="cardCvc" type="text" inputmode="numeric" required placeholder="123" autocomplete="cc-csc" />
+                <span class="field-error" data-for="cardCvc"></span>
+              </div>
+            </div>
+          </fieldset>
+          <button type="submit" class="btn btn-primary btn-block">Place order</button>
+        </form>
+        <aside class="order-summary" aria-label="Order summary">
+          <h2>Order summary</h2>
+          <ul class="summary-lines" id="checkout-lines"></ul>
+          <div class="summary-totals">
+            <div><span>Subtotal</span><strong id="checkout-subtotal">₦0</strong></div>
+            <div><span>Shipping</span><strong id="checkout-shipping">₦0</strong></div>
+            <div class="total"><span>Total</span><strong id="checkout-total">₦0</strong></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="success-view container" id="success-view" hidden>
+      <div class="success-card">
+        <div class="success-icon" aria-hidden="true">✓</div>
+        <h1>Order placed</h1>
+        <p id="success-message">Thanks for trying ShopFront. This was a demo checkout — nothing was charged.</p>
+        <p class="order-id" id="order-id"></p>
+        <button type="button" class="btn btn-primary" id="shop-again">Back to shop</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="cart-drawer" id="cart-drawer" hidden>
+    <div class="cart-backdrop" id="cart-backdrop"></div>
+    <aside class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+      <div class="cart-header">
+        <h2 id="cart-title">Your cart</h2>
+        <button type="button" class="icon-btn" id="cart-close" aria-label="Close cart">×</button>
+      </div>
+      <div class="cart-body" id="cart-body"></div>
+      <div class="cart-footer" id="cart-footer">
+        <div class="cart-total-row">
+          <span>Subtotal</span>
+          <strong id="cart-subtotal">₦0</strong>
+        </div>
+        <button type="button" class="btn btn-primary btn-block" id="go-checkout">Checkout</button>
+      </div>
+    </aside>
+  </div>
+
+  <div class="modal" id="product-modal" hidden>
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button type="button" class="icon-btn modal-close" id="modal-close" aria-label="Close">×</button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>ShopFront demo · HTML, CSS &amp; JavaScript</p>
+      <p>Prices in Nigerian Naira (₦) for display only</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
