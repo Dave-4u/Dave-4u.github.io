@@ -412,3 +412,9 @@ a:hover {
     padding-top: 3.5rem;
   }
 }
+
+.muted-line {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin: 0.15rem 0 0.65rem;
+}
