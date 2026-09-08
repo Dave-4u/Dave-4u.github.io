@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pathfinding Visualizer · Dijkstra &amp; A*</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="back" href="../../">← Portfolio</a>
+      <h1>Pathfinding Visualizer</h1>
+      <p class="sub">Compare Dijkstra and A* on a grid. Paint walls, place start/goal, then watch the search expand.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="toolbar" aria-label="Controls">
+      <label>
+        Algorithm
+        <select id="algorithm">
+          <option value="astar">A*</option>
+          <option value="dijkstra">Dijkstra</option>
+        </select>
+      </label>
+      <label>
+        Speed
+        <input id="speed" type="range" min="1" max="60" value="28" />
+      </label>
+      <div class="btn-row">
+        <button id="run" class="primary" type="button">Run</button>
+        <button id="clearPath" type="button">Clear path</button>
+        <button id="clearWalls" type="button">Clear walls</button>
+        <button id="maze" type="button">Random walls</button>
+      </div>
+      <p class="hint">Click: toggle wall · Drag: paint · Shift+click: set start · Alt+click: set goal</p>
+    </section>
+
+    <section class="stats" aria-live="polite">
+      <span>Visited: <strong id="visited">0</strong></span>
+      <span>Path length: <strong id="pathLen">—</strong></span>
+      <span>Status: <strong id="status">Ready</strong></span>
+    </section>
+
+    <div class="board-wrap">
+      <div id="grid" class="grid" role="grid" aria-label="Pathfinding grid"></div>
+    </div>
+
+    <section class="legend">
+      <span><i class="swatch start"></i> Start</span>
+      <span><i class="swatch goal"></i> Goal</span>
+      <span><i class="swatch wall"></i> Wall</span>
+      <span><i class="swatch visited"></i> Visited</span>
+      <span><i class="swatch frontier"></i> Frontier</span>
+      <span><i class="swatch path"></i> Path</span>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

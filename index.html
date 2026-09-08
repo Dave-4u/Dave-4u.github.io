@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dave — computer scientist and software engineer. Portfolio of systems, algorithms, and language tooling." />
+  <title>Dave · Computer Science Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="#top">Dave<span class="logo-dot">.</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <a class="nav-github" href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Computer Scientist · Software Engineer</p>
+          <h1>Building clear systems from first principles.</h1>
+          <p class="lead">
+            I work across algorithms, language runtimes, and concurrent systems —
+            turning theory into tools you can run, inspect, and extend.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#projects">View projects</a>
+            <a class="btn btn-ghost" href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-hidden="true">
+          <pre class="code-panel"><code><span class="c-kw">fn</span> <span class="c-fn">search</span>(graph, start, goal):
+  frontier = PriorityQueue()
+  frontier.put(start, <span class="c-num">0</span>)
+  came_from = {start: <span class="c-kw">None</span>}
+  cost_so_far = {start: <span class="c-num">0</span>}
+
+  <span class="c-kw">while not</span> frontier.empty():
+    current = frontier.get()
+    <span class="c-kw">if</span> current == goal:
+      <span class="c-kw">break</span>
+    <span class="c-kw">for</span> next <span class="c-kw">in</span> graph.neighbors(current):
+      new_cost = cost_so_far[current] + edge(current, next)
+      <span class="c-kw">if</span> next <span class="c-kw">not in</span> cost_so_far \
+         <span class="c-kw">or</span> new_cost &lt; cost_so_far[next]:
+        cost_so_far[next] = new_cost
+        frontier.put(next, new_cost + h(next, goal))
+        came_from[next] = current</code></pre>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container narrow">
+        <h2>About</h2>
+        <p>
+          I am Dave, a computer scientist focused on software that is correct,
+          measurable, and understandable. My work sits at the intersection of
+          data structures &amp; algorithms, programming language implementation,
+          and systems concurrency.
+        </p>
+        <p>
+          This site hosts interactive demos and small, complete projects —
+          each with source you can clone, run, and read. I care about clear
+          interfaces, careful edge cases, and documentation that matches the code.
+        </p>
+        <ul class="about-list">
+          <li>Strong foundation in DSA and complexity analysis</li>
+          <li>Hands-on experience with interpreters and AST tooling</li>
+          <li>Practical concurrency: locks, atomic design, bounded caches</li>
+          <li>Comfortable across Python, JavaScript, C-family languages, and SQL</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="projects">
+      <div class="container">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <p>Interactive and testable work across algorithms, languages, and systems.</p>
+        </div>
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="tag">Algorithms</span>
+              <span class="tag">Visualization</span>
+            </div>
+            <h3>Pathfinding Visualizer</h3>
+            <p>
+              Interactive grid demo of Dijkstra and A* with wall painting,
+              heuristics, and step-by-step search animation. Pure HTML/CSS/JS.
+            </p>
+            <div class="project-links">
+              <a href="projects/pathfinding-visualizer/">Launch demo</a>
+              <a href="https://github.com/Dave-4u/Dave-4u.github.io/tree/main/projects/pathfinding-visualizer" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="tag">Languages</span>
+              <span class="tag">Python</span>
+            </div>
+            <h3>Miniature Interpreter</h3>
+            <p>
+              A small expression language with lexer, recursive-descent parser,
+              AST, and evaluator — plus a unit-test suite covering parsing and runtime.
+            </p>
+            <div class="project-links">
+              <a href="projects/mini-interpreter/">Overview</a>
+              <a href="https://github.com/Dave-4u/Dave-4u.github.io/tree/main/projects/mini-interpreter" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="tag">Systems</span>
+              <span class="tag">Concurrency</span>
+            </div>
+            <h3>Thread-Safe LRU Cache</h3>
+            <p>
+              Concurrent least-recently-used cache with O(1) get/put, fine-grained
+              locking, hit-rate stats, and a stress demo with multiple workers.
+            </p>
+            <div class="project-links">
+              <a href="projects/concurrent-lru/">Overview</a>
+              <a href="https://github.com/Dave-4u/Dave-4u.github.io/tree/main/projects/concurrent-lru" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="tag">Data Structures</span>
+              <span class="tag">Demo</span>
+            </div>
+            <h3>Heap &amp; Trie Playground</h3>
+            <p>
+              Browser demos of a binary min-heap and a prefix trie — insert,
+              extract, autocomplete — with live structure snapshots.
+            </p>
+            <div class="project-links">
+              <a href="projects/ds-playground/">Launch demo</a>
+              <a href="https://github.com/Dave-4u/Dave-4u.github.io/tree/main/projects/ds-playground" target="_blank" rel="noopener noreferrer">Source</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <div class="section-head">
+          <h2>Skills</h2>
+          <p>Core areas I study and apply in project work.</p>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card">
+            <h3>Data Structures &amp; Algorithms</h3>
+            <p>Graphs, heaps, tries, hashing, sorting, dynamic programming, complexity analysis.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Systems &amp; Concurrency</h3>
+            <p>Threading, synchronization, memory locality, caches, rate limiting, profiling basics.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Networking</h3>
+            <p>TCP/UDP fundamentals, HTTP, sockets, request pipelines, latency and throughput trade-offs.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Databases</h3>
+            <p>Relational modeling, SQL, indexing intuition, transactions, and simple query planning ideas.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Languages</h3>
+            <p>Python, JavaScript/TypeScript, C/C++, Go, SQL — plus shell tooling for everyday workflows.</p>
+          </div>
+          <div class="skill-card">
+            <h3>Engineering Practice</h3>
+            <p>Testing, clear APIs, readable docs, git hygiene, and designing for inspection and extension.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="contact">
+      <div class="container narrow contact">
+        <h2>Contact</h2>
+        <p>
+          The best place to follow my work is on GitHub.
+          Issues and pull requests on these projects are welcome.
+        </p>
+        <a class="btn btn-primary" href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer">github.com/Dave-4u</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Dave · Computer Science Portfolio</p>
+      <a href="https://github.com/Dave-4u/Dave-4u.github.io" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

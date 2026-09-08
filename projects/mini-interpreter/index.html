@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Miniature Interpreter</title>
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    .proj { padding: 2.5rem 0 4rem; }
+    .proj pre {
+      background: #121a2f;
+      border: 1px solid rgba(148,163,184,0.18);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      overflow-x: auto;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.88rem;
+      color: #c9d4ef;
+    }
+    .proj .muted { color: #9aa8c7; }
+    .proj ul { color: #9aa8c7; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../../">Dave<span class="logo-dot">.</span></a>
+      <nav class="nav"><a href="../../#projects">Projects</a></nav>
+    </div>
+  </header>
+  <main class="proj">
+    <div class="container narrow">
+      <p class="eyebrow">Languages · Python</p>
+      <h1>Miniature Interpreter</h1>
+      <p class="muted">
+        A small expression language implemented end-to-end:
+        lexer → recursive-descent parser → AST → evaluator, with unit tests.
+      </p>
+      <h2>Pipeline</h2>
+      <ul>
+        <li><strong>Lexer</strong> — numbers, identifiers, operators, parentheses</li>
+        <li><strong>Parser</strong> — precedence, right-associative <code>^</code>, assignments</li>
+        <li><strong>Evaluator</strong> — environment for variables, runtime checks</li>
+      </ul>
+      <h2>Example</h2>
+      <pre>x = 10;
+y = x * 2 + 1;
+y;          → 21</pre>
+      <h2>Run</h2>
+      <pre>cd projects/mini-interpreter
+python demo.py
+python -m unittest tests/test_interpreter.py -v
+python -m src.interpreter   # REPL</pre>
+      <p><a href="https://github.com/Dave-4u/Dave-4u.github.io/tree/main/projects/mini-interpreter">View source on GitHub →</a></p>
+    </div>
+  </main>
+</body>
+</html>
