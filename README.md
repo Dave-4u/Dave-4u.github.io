@@ -14,7 +14,9 @@ Personal portfolio for [Dave-4u](https://github.com/Dave-4u).
 └── projects/
     ├── tellme/
     ├── shopfront/
-    └── expense-tracker/
+    ├── expense-tracker/
+    ├── rock-paper-scissors/   # playable preview
+    └── number-guessing/       # playable preview
 ```
 
 Other projects (RentWatch, C# rock–paper–scissors, Python/Java number guessing) link out to their GitHub repos.

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Number Guessing · Preview</title>
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    .game-box {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.25);
+    }
+    .game-box .prompt { font-family: "IBM Plex Mono", monospace; margin-bottom: 0.75rem; color: #9ae6b4; }
+    .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-bottom: 1rem; }
+    .row input {
+      flex: 1;
+      min-width: 8rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(0,0,0,0.35);
+      color: inherit;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 1rem;
+    }
+    .log {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      min-height: 4rem;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../../">Dave<span class="logo-dot">.</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../../#projects">Projects</a>
+        <a href="https://github.com/Dave-4u/python-number-guessing" target="_blank" rel="noopener noreferrer">Python</a>
+        <a href="https://github.com/Dave-4u/java-number-guessing" target="_blank" rel="noopener noreferrer">Java</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Browser preview · same idea as the Python and Java console games</p>
+      <h1>Number Guessing</h1>
+      <p class="lead">I picked a number from 1 to 100. Guess until you hit it. Too high / too low hints along the way.</p>
+
+      <div class="game-box">
+        <p class="prompt">Your guess:</p>
+        <form class="row" id="form">
+          <input id="guess" type="number" min="1" max="100" placeholder="1–100" required />
+          <button class="btn btn-primary" type="submit">Guess</button>
+          <button class="btn btn-ghost" type="button" id="newGame">New number</button>
+        </form>
+        <div class="log" id="log">Enter a number and press Guess.</div>
+      </div>
+
+      <p style="margin-top:1.5rem"><a class="btn btn-ghost" href="../../">Back to portfolio</a></p>
+    </div>
+  </main>
+  <script>
+    let secret = 0;
+    let tries = 0;
+    const log = document.getElementById("log");
+    const input = document.getElementById("guess");
+
+    function newSecret() {
+      secret = Math.floor(Math.random() * 100) + 1;
+      tries = 0;
+      log.textContent = "New game. Guess a number from 1 to 100.";
+      input.value = "";
+      input.focus();
+    }
+
+    document.getElementById("form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const guess = Number(input.value);
+      if (!Number.isInteger(guess) || guess < 1 || guess > 100) {
+        log.textContent = "Please enter a whole number from 1 to 100.";
+        return;
+      }
+      tries++;
+      if (guess < secret) {
+        log.textContent = guess + " — too low.\nTries: " + tries;
+      } else if (guess > secret) {
+        log.textContent = guess + " — too high.\nTries: " + tries;
+      } else {
+        log.textContent = "Correct! " + guess + " in " + tries + " tries.\nPress New number to play again.";
+      }
+      input.select();
+    });
+
+    document.getElementById("newGame").addEventListener("click", newSecret);
+    newSecret();
+  </script>
+</body>
+</html>

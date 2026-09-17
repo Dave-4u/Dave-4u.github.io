@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock Paper Scissors · Preview</title>
+  <link rel="stylesheet" href="../../css/styles.css" />
+  <style>
+    .game-box {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.25);
+    }
+    .game-box .prompt { font-family: "IBM Plex Mono", monospace; margin-bottom: 1rem; color: #9ae6b4; }
+    .moves { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 1rem; }
+    .log {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      min-height: 6rem;
+      white-space: pre-wrap;
+    }
+    .score { margin-top: 1rem; opacity: 0.85; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="logo" href="../../">Dave<span class="logo-dot">.</span></a>
+      <nav class="nav" aria-label="Primary">
+        <a href="../../#projects">Projects</a>
+        <a href="https://github.com/Dave-4u/csharp-rock-paper-scissors" target="_blank" rel="noopener noreferrer">C# source</a>
+      </nav>
+    </div>
+  </header>
+  <main id="main" class="section">
+    <div class="container narrow">
+      <p class="eyebrow">Browser preview · same idea as the C# console game</p>
+      <h1>Rock Paper Scissors</h1>
+      <p class="lead">Pick a move. The computer picks at random. Score updates as you play.</p>
+
+      <div class="game-box">
+        <p class="prompt">Your move:</p>
+        <div class="moves">
+          <button class="btn btn-primary" type="button" data-move="rock">Rock</button>
+          <button class="btn btn-primary" type="button" data-move="paper">Paper</button>
+          <button class="btn btn-primary" type="button" data-move="scissors">Scissors</button>
+          <button class="btn btn-ghost" type="button" id="reset">Reset score</button>
+        </div>
+        <div class="log" id="log">Press Rock, Paper, or Scissors to start.</div>
+        <p class="score" id="score">Wins: 0 · Losses: 0 · Ties: 0</p>
+      </div>
+
+      <p style="margin-top:1.5rem"><a class="btn btn-ghost" href="../../">Back to portfolio</a></p>
+    </div>
+  </main>
+  <script>
+    const choices = ["rock", "paper", "scissors"];
+    let wins = 0, losses = 0, ties = 0;
+    const log = document.getElementById("log");
+    const score = document.getElementById("score");
+
+    function beats(a, b) {
+      return (a === "rock" && b === "scissors")
+        || (a === "paper" && b === "rock")
+        || (a === "scissors" && b === "paper");
+    }
+
+    function play(player) {
+      const computer = choices[Math.floor(Math.random() * choices.length)];
+      let line;
+      if (player === computer) {
+        ties++;
+        line = "Tie!";
+      } else if (beats(player, computer)) {
+        wins++;
+        line = "You win!";
+      } else {
+        losses++;
+        line = "You lose.";
+      }
+      log.textContent =
+        "You chose: " + player + "\n" +
+        "Computer chose: " + computer + "\n" +
+        line;
+      score.textContent = "Wins: " + wins + " · Losses: " + losses + " · Ties: " + ties;
+    }
+
+    document.querySelectorAll("[data-move]").forEach((btn) => {
+      btn.addEventListener("click", () => play(btn.getAttribute("data-move")));
+    });
+    document.getElementById("reset").addEventListener("click", () => {
+      wins = losses = ties = 0;
+      log.textContent = "Score reset. Pick a move.";
+      score.textContent = "Wins: 0 · Losses: 0 · Ties: 0";
+    });
+  </script>
+</body>
+</html>
