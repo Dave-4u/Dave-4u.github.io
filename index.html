@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Adegboro David Oluwadamilare (Dave) — B.Sc. Computer Science graduate. Mobile development, IT support, networking, and software projects." />
+  <meta name="description" content="Adegboro David Oluwadamilare (Dave) — B.Sc. Computer Science graduate. Android, IT support, and simple software projects." />
   <title>Dave Adegboro · Computer Science</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -46,23 +46,15 @@
           </div>
         </div>
         <aside class="hero-panel" aria-hidden="true">
-          <pre class="code-panel"><code><span class="c-kw">fn</span> <span class="c-fn">search</span>(graph, start, goal):
-  frontier = PriorityQueue()
-  frontier.put(start, <span class="c-num">0</span>)
-  came_from = {start: <span class="c-kw">None</span>}
-  cost_so_far = {start: <span class="c-num">0</span>}
+          <pre class="code-panel"><code><span class="c-kw">string</span>[] choices = { <span class="c-num">"rock"</span>, <span class="c-num">"paper"</span>, <span class="c-num">"scissors"</span> };
+<span class="c-kw">var</span> computer = choices[rng.Next(choices.Length)];
 
-  <span class="c-kw">while not</span> frontier.empty():
-    current = frontier.get()
-    <span class="c-kw">if</span> current == goal:
-      <span class="c-kw">break</span>
-    <span class="c-kw">for</span> next <span class="c-kw">in</span> graph.neighbors(current):
-      new_cost = cost_so_far[current] + edge(current, next)
-      <span class="c-kw">if</span> next <span class="c-kw">not in</span> cost_so_far \
-         <span class="c-kw">or</span> new_cost &lt; cost_so_far[next]:
-        cost_so_far[next] = new_cost
-        frontier.put(next, new_cost + h(next, goal))
-        came_from[next] = current</code></pre>
+<span class="c-kw">if</span> (player == computer)
+  Console.WriteLine(<span class="c-num">"Tie!"</span>);
+<span class="c-kw">else if</span> (playerWins(player, computer))
+  Console.WriteLine(<span class="c-num">"You win!"</span>);
+<span class="c-kw">else</span>
+  Console.WriteLine(<span class="c-num">"You lose."</span>);</code></pre>
         </aside>
       </div>
     </section>
@@ -131,7 +123,7 @@
       <div class="container">
         <div class="section-head">
           <h2>Projects</h2>
-          <p>Interactive and testable work across algorithms, languages, and systems.</p>
+          <p>Final-year work, small web apps, and simple console practice games.</p>
         </div>
         <div class="project-grid">
           <article class="project-card">
@@ -148,6 +140,21 @@
             <div class="project-links">
               <a href="projects/tellme/">Overview</a>
               <a href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-meta">
+              <span class="tag">Web</span>
+              <span class="tag">PWA</span>
+            </div>
+            <h3>RentWatch</h3>
+            <p>
+              Landlord rental monitor: properties, yearly leases, cash payment
+              logs, and overdue alerts. Built as a web app for a real client demo.
+            </p>
+            <div class="project-links">
+              <a href="https://github.com/Dave-4u/rentwatch" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </article>
 
@@ -187,72 +194,53 @@
 
           <article class="project-card">
             <div class="project-meta">
-              <span class="tag">Algorithms</span>
-              <span class="tag">Visualization</span>
+              <span class="tag">C#</span>
+              <span class="tag">Console</span>
             </div>
-            <h3>Pathfinding Visualizer</h3>
+            <h3>Rock Paper Scissors</h3>
             <p>
-              Interactive grid demo of Dijkstra and A* with wall painting,
-              heuristics, and step-by-step search animation. Pure HTML/CSS/JS.
+              Simple console game — type rock, paper, or scissors and play
+              against the computer. Score tracking, no GUI.
             </p>
             <div class="project-links">
-              <a href="projects/pathfinding-visualizer/">Launch demo</a>
-              <a href="https://github.com/Dave-4u/pathfinding-visualizer" target="_blank" rel="noopener noreferrer">Source</a>
+              <a href="https://github.com/Dave-4u/csharp-rock-paper-scissors" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </article>
 
           <article class="project-card">
             <div class="project-meta">
-              <span class="tag">Languages</span>
               <span class="tag">Python</span>
+              <span class="tag">Console</span>
             </div>
-            <h3>Miniature Interpreter</h3>
+            <h3>Number Guessing (Python)</h3>
             <p>
-              A small expression language with lexer, recursive-descent parser,
-              AST, and evaluator — plus a unit-test suite covering parsing and runtime.
+              Guess a random number from 1 to 100. The program says too high
+              or too low until you get it.
             </p>
             <div class="project-links">
-              <a href="projects/mini-interpreter/">Overview</a>
-              <a href="https://github.com/Dave-4u/mini-interpreter" target="_blank" rel="noopener noreferrer">Source</a>
+              <a href="https://github.com/Dave-4u/python-number-guessing" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </article>
 
           <article class="project-card">
             <div class="project-meta">
-              <span class="tag">Systems</span>
-              <span class="tag">Concurrency</span>
+              <span class="tag">Java</span>
+              <span class="tag">Console</span>
             </div>
-            <h3>Thread-Safe LRU Cache</h3>
+            <h3>Number Guessing (Java)</h3>
             <p>
-              Concurrent least-recently-used cache with O(1) get/put, fine-grained
-              locking, hit-rate stats, and a stress demo with multiple workers.
+              Same number guessing game in Java — Scanner input, Random secret,
+              and a simple loop.
             </p>
             <div class="project-links">
-              <a href="projects/concurrent-lru/">Overview</a>
-              <a href="https://github.com/Dave-4u/concurrent-lru" target="_blank" rel="noopener noreferrer">Source</a>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-meta">
-              <span class="tag">Data Structures</span>
-              <span class="tag">Demo</span>
-            </div>
-            <h3>Heap &amp; Trie Playground</h3>
-            <p>
-              Browser demos of a binary min-heap and a prefix trie — insert,
-              extract, autocomplete — with live structure snapshots.
-            </p>
-            <div class="project-links">
-              <a href="projects/ds-playground/">Launch demo</a>
-              <a href="https://github.com/Dave-4u/ds-playground" target="_blank" rel="noopener noreferrer">Source</a>
+              <a href="https://github.com/Dave-4u/java-number-guessing" target="_blank" rel="noopener noreferrer">Source</a>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt" id="skills">
+    <section class="section section-alt" <section class="section section-alt" id="skills">
       <div class="container">
         <div class="section-head">
           <h2>Skills</h2>
@@ -303,6 +291,7 @@
           <a class="btn btn-primary" href="mailto:adegborodamilaredavid@gmail.com">Email</a>
           <a class="btn btn-ghost" href="tel:+2348101597428">Call</a>
           <a class="btn btn-ghost" href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="btn btn-ghost" href="https://www.linkedin.com/in/adegboro-david-76a06a430/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         </div>
       </div>
     </section>
