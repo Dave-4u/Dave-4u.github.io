@@ -461,6 +461,21 @@ a:hover {
   font-size: 1rem !important;
 }
 
+
+.education-line {
+  margin-top: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(0, 255, 136, 0.08);
+  border: 1px solid rgba(0, 255, 136, 0.25);
+  border-radius: 10px;
+  color: #cccccc;
+  font-size: 1.05rem;
+}
+
+.education-line strong {
+  color: #00ff88;
+}
+
 /* Services */
 .services {
   padding: 80px 0;
