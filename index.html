@@ -3,306 +3,423 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Adegboro David Oluwadamilare (Dave) — B.Sc. Computer Science graduate. Android, IT support, and simple software projects." />
-  <title>Dave Adegboro · Computer Science</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <meta name="description" content="Adegboro David Oluwadamilare (Dave) — Computer Science Graduate. Android (Kotlin · Jetpack Compose), IT Support &amp; Software Projects." />
+  <title>Dave Adegboro · Portfolio</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="background-animation" aria-hidden="true">
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
+  </div>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="#top">Dave<span class="logo-dot">.</span></a>
-      <nav class="nav" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-        <a class="nav-github" href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer">GitHub</a>
-      </nav>
+  <nav class="navbar" aria-label="Primary">
+    <div class="nav-container">
+      <a class="logo" href="#home">
+        <i class="fas fa-code"></i>
+        <span>Dave.</span>
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#services" class="nav-link">What I Do</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
       <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
       </button>
     </div>
-  </header>
+  </nav>
 
-  <main id="main">
-    <section class="hero" id="top">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <p class="eyebrow">B.Sc. Computer Science · Class of 2026</p>
-          <h1>Computer science graduate building practical software.</h1>
-          <p class="lead">
-            Elizade University graduate with SIWES experience at Oando across IT support,
-            hardware, and software — plus mobile apps in Kotlin, Jetpack Compose, and Firebase.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects">View projects</a>
-            <a class="btn btn-ghost" href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer">GitHub profile</a>
+  <main>
+    <section id="home" class="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <p class="hero-greeting">Hello, I'm</p>
+            <h1 class="hero-name">Adegboro David</h1>
+            <p class="hero-title">Computer Science Graduate | Android (Kotlin · Jetpack Compose) | IT Support &amp; Software Projects</p>
+            <p class="hero-description">
+              Elizade University graduate (class of 2026) based in Port Harcourt.
+              SIWES experience at Oando across Help Desk, Hardware, and Software —
+              plus mobile apps and practical web projects.
+            </p>
+            <div class="hero-buttons">
+              <a class="cta-button" href="#contact">
+                <i class="fas fa-envelope"></i> Let's Connect
+              </a>
+              <a class="secondary-button" href="assets/Adegboro_David_Oluwadamilare_CV.pdf" download="Adegboro_David_Oluwadamilare_CV.pdf">
+                <i class="fas fa-download"></i> Download CV
+              </a>
+            </div>
+            <div class="social-links">
+              <span>Find me on</span>
+              <a href="https://github.com/Dave-4u" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+              </a>
+              <a href="https://www.linkedin.com/in/adegboro-david-76a06a430/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+              </a>
+            </div>
+          </div>
+          <div class="hero-image">
+            <div class="image-container avatar">
+              <span class="avatar-initials" aria-hidden="true">DA</span>
+              <span class="sr-only">Adegboro David initials avatar</span>
+            </div>
           </div>
         </div>
-        <aside class="hero-panel" aria-hidden="true">
-          <pre class="code-panel"><code><span class="c-kw">string</span>[] choices = { <span class="c-num">"rock"</span>, <span class="c-num">"paper"</span>, <span class="c-num">"scissors"</span> };
-<span class="c-kw">var</span> computer = choices[rng.Next(choices.Length)];
-
-<span class="c-kw">if</span> (player == computer)
-  Console.WriteLine(<span class="c-num">"Tie!"</span>);
-<span class="c-kw">else if</span> (playerWins(player, computer))
-  Console.WriteLine(<span class="c-num">"You win!"</span>);
-<span class="c-kw">else</span>
-  Console.WriteLine(<span class="c-num">"You lose."</span>);</code></pre>
-        </aside>
       </div>
     </section>
 
-    <section class="section" id="about">
-      <div class="container narrow">
-        <h2>About</h2>
-        <p>
-          I am Adegboro David Oluwadamilare (Dave), a 2026 B.Sc. Computer Science
-          graduate from Elizade University, based in Port Harcourt, Nigeria. I am
-          interested in software development, mobile applications, IT operations,
-          and the practical side of networking and cybersecurity.
-        </p>
-        <p>
-          Through SIWES at Oando I rotated through Help Desk, Hardware, and Software,
-          supporting end users and learning how corporate IT keeps people productive.
-          I have also built TellMe, a location-based community app in Kotlin with
-          Jetpack Compose and Firebase, and volunteered as a peer tutor for Cisco Packet Tracer.
-        </p>
-        <ul class="about-list">
-          <li>B.Sc. Computer Science, Elizade University (2026)</li>
-          <li>SIWES at Oando — IT support, hardware, and software rotations</li>
-          <li>Mobile development with Kotlin, Jetpack Compose, and Firebase</li>
-          <li>Foundational cybersecurity and Cisco Packet Tracer tutoring</li>
-        </ul>
-      </div>
-    </section>
-
-
-    <section class="section section-alt" id="experience">
+    <section id="about" class="about">
       <div class="container">
-        <div class="section-head">
-          <h2>Experience</h2>
-          <p>Industry placements and teaching support.</p>
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-text">
+            <p>
+              I'm Adegboro David Oluwadamilare (Dave), a B.Sc. Computer Science graduate
+              from Elizade University. I care about software that people can actually use —
+              Android apps, small web tools, and the IT work that keeps systems running.
+            </p>
+            <p>
+              Through SIWES at Oando I rotated through Help Desk, Hardware, and Software.
+              I've also built TellMe, a location-based community app in Kotlin with Jetpack
+              Compose and Firebase, and volunteered as a peer tutor for Cisco Packet Tracer.
+            </p>
+            <div class="stats">
+              <div class="stat">
+                <h3>6+</h3>
+                <p>Months SIWES</p>
+              </div>
+              <div class="stat">
+                <h3>2026</h3>
+                <p>CS Graduate</p>
+              </div>
+              <div class="stat">
+                <h3>7</h3>
+                <p>Featured Projects</p>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </section>
+
+    <section id="services" class="services">
+      <div class="container">
+        <h2 class="section-title">What I Do</h2>
+        <p class="section-subtitle">Areas I focus on</p>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
+            <h3>Mobile Apps</h3>
+            <p>Android development with Kotlin and Jetpack Compose, including Firebase-backed features and polished UI flows.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-headset"></i></div>
+            <h3>IT Support</h3>
+            <p>Help desk support, hardware diagnostics, and software troubleshooting from corporate SIWES rotations.</p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+            <h3>Web Projects</h3>
+            <p>Responsive HTML, CSS, and JavaScript apps — storefronts, trackers, and practical browser tools.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="skills">
+      <div class="container">
+        <h2 class="section-title">Technical Skills</h2>
         <div class="skills-grid">
-          <div class="skill-card">
+          <div class="skill-category">
+            <h3>Languages</h3>
+            <div class="skill-item">
+              <span>Kotlin</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Python</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Java</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="70%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>JavaScript</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="70%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>C# (basic)</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="45%"></div></div>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Mobile</h3>
+            <div class="skill-item">
+              <span>Jetpack Compose</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="75%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Firebase</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="70%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Android Studio</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>Web</h3>
+            <div class="skill-item">
+              <span>HTML &amp; CSS</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>JavaScript (DOM)</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="70%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Responsive UI</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="80%"></div></div>
+            </div>
+          </div>
+          <div class="skill-category">
+            <h3>IT &amp; Security</h3>
+            <div class="skill-item">
+              <span>Help Desk / Support</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="85%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Hardware Basics</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="70%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Cisco Packet Tracer</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="65%"></div></div>
+            </div>
+            <div class="skill-item">
+              <span>Ethical Hacking (foundations)</span>
+              <div class="skill-bar"><div class="skill-progress" data-width="50%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience" class="experience">
+      <div class="container">
+        <h2 class="section-title">Experience</h2>
+        <p class="section-subtitle">Placements and teaching support</p>
+        <div class="cert-grid">
+          <div class="cert-card">
+            <div class="cert-icon"><i class="fas fa-building"></i></div>
             <h3>Oando — SIWES Student</h3>
-            <p class="muted-line">April 2025 – October 2025</p>
-            <p>
-              Six-month placement across Help Desk, Hardware, and Software:
-              end-user support, hardware diagnostics, and exposure to C# and
-              enterprise software operations.
-            </p>
+            <p>Help Desk, Hardware &amp; Software rotations. End-user support, diagnostics, and exposure to enterprise software operations.</p>
+            <span class="cert-date">Apr 2025 – Oct 2025</span>
           </div>
-          <div class="skill-card">
+          <div class="cert-card">
+            <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
             <h3>Rewod Technologies — IT Student</h3>
-            <p class="muted-line">August 2024 – October 2024</p>
-            <p>
-              Three-month IT placement focused on foundational ethical hacking
-              and cybersecurity concepts through structured technical training.
-            </p>
+            <p>Foundational cybersecurity and ethical hacking concepts through structured technical training.</p>
+            <span class="cert-date">Aug – Oct 2024</span>
           </div>
-          <div class="skill-card">
+          <div class="cert-card">
+            <div class="cert-icon"><i class="fas fa-chalkboard-teacher"></i></div>
             <h3>Peer Tutor — Cisco Packet Tracer</h3>
-            <p class="muted-line">Elizade University · Volunteer</p>
-            <p>
-              Supported 100-level students practicing Packet Tracer, helping
-              beginners build intuition for network architecture and connectivity.
-            </p>
+            <p>Supported 100-level students at Elizade University building intuition for network architecture.</p>
+            <span class="cert-date">Volunteer</span>
           </div>
         </div>
       </div>
     </section>
-    <section class="section" id="projects">
+
+    <section id="projects" class="projects">
       <div class="container">
-        <div class="section-head">
-          <h2>Projects</h2>
-          <p>Final-year work, small web apps, and simple console practice games.</p>
-        </div>
-        <div class="project-grid">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Simple, practical work you can try</p>
+        <div class="projects-grid">
           <article class="project-card">
-            <div class="project-meta">
-              <span class="tag">Mobile</span>
-              <span class="tag">Final Year</span>
-            </div>
-            <h3>TellMe</h3>
-            <p>
-              Location-based Android app for community information sharing.
-              Built with Kotlin, Jetpack Compose, and Firebase — UI, backend
-              integration, and feature testing as a final-year project.
-            </p>
-            <div class="project-links">
-              <a href="projects/tellme/">Overview</a>
+            <div class="project-image"><i class="fas fa-comments"></i></div>
+            <div class="project-content">
+              <h3>TellMe</h3>
+              <p>Location-based Android app for community information sharing. Final-year project with Kotlin, Jetpack Compose, and Firebase.</p>
+              <div class="project-tech">
+                <span>Kotlin</span><span>Jetpack Compose</span><span>Firebase</span>
+              </div>
+              <div class="project-links">
+                <a href="projects/tellme/" class="project-link"><i class="fas fa-external-link-alt"></i> Overview</a>
+              </div>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-meta">
-              <span class="tag">Web</span>
-              <span class="tag">PWA</span>
-            </div>
-            <h3>RentWatch</h3>
-            <p>
-              Landlord rental monitor: properties, yearly leases, cash payment
-              logs, and overdue alerts. Built as a web app for a real client demo.
-            </p>
-            <div class="project-links">
-              <a href="https://github.com/Dave-4u/rentwatch" target="_blank" rel="noopener noreferrer">Source</a>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-meta">
-              <span class="tag">Web</span>
-              <span class="tag">HTML·CSS·JS</span>
-            </div>
-            <h3>ShopFront</h3>
-            <p>
-              Responsive e-commerce storefront with product catalog, search and
-              category filters, cart persistence, and a validated checkout UI
-              demo — pure HTML, CSS, and JavaScript.
-            </p>
-            <div class="project-links">
-              <a href="projects/shopfront/">Launch demo</a>
-              <a href="https://github.com/Dave-4u/shopfront" target="_blank" rel="noopener noreferrer">Source</a>
+            <div class="project-image"><i class="fas fa-home"></i></div>
+            <div class="project-content">
+              <h3>RentWatch</h3>
+              <p>Landlord rental monitor: properties, yearly leases, cash payment logs, and overdue alerts for a real client demo.</p>
+              <div class="project-tech">
+                <span>Web</span><span>PWA</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/Dave-4u/rentwatch" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
+              </div>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-meta">
-              <span class="tag">Web</span>
-              <span class="tag">HTML·CSS·JS</span>
-            </div>
-            <h3>Expense Tracker</h3>
-            <p>
-              Personal spending tracker with categories, monthly budgets,
-              summary cards, and a category bar chart. Expenses persist in
-              localStorage for a practical browser-only workflow.
-            </p>
-            <div class="project-links">
-              <a href="projects/expense-tracker/">Launch demo</a>
-              <a href="https://github.com/Dave-4u/expense-tracker" target="_blank" rel="noopener noreferrer">Source</a>
+            <div class="project-image"><i class="fas fa-shopping-bag"></i></div>
+            <div class="project-content">
+              <h3>ShopFront</h3>
+              <p>Responsive e-commerce storefront with catalog, search and filters, cart persistence, and a validated checkout UI demo.</p>
+              <div class="project-tech">
+                <span>HTML</span><span>CSS</span><span>JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a href="projects/shopfront/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
+                <a href="https://github.com/Dave-4u/shopfront" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
+              </div>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-meta">
-              <span class="tag">C#</span>
-              <span class="tag">Console</span>
-            </div>
-            <h3>Rock Paper Scissors</h3>
-            <p>
-              Simple console game — type rock, paper, or scissors and play
-              against the computer. Score tracking, no GUI.
-            </p>
-            <div class="project-links">
-              <a href="projects/rock-paper-scissors/">Launch demo</a>
-              <a href="https://github.com/Dave-4u/csharp-rock-paper-scissors" target="_blank" rel="noopener noreferrer">Source</a>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-meta">
-              <span class="tag">Python</span>
-              <span class="tag">Console</span>
-            </div>
-            <h3>Number Guessing (Python)</h3>
-            <p>
-              Guess a random number from 1 to 100. The program says too high
-              or too low until you get it.
-            </p>
-            <div class="project-links">
-              <a href="projects/number-guessing/">Launch demo</a>
-              <a href="https://github.com/Dave-4u/python-number-guessing" target="_blank" rel="noopener noreferrer">Source</a>
+            <div class="project-image"><i class="fas fa-wallet"></i></div>
+            <div class="project-content">
+              <h3>Expense Tracker</h3>
+              <p>Personal spending tracker with categories, monthly budgets, summary cards, and a category bar chart. Data persists in localStorage.</p>
+              <div class="project-tech">
+                <span>HTML</span><span>CSS</span><span>JavaScript</span>
+              </div>
+              <div class="project-links">
+                <a href="projects/expense-tracker/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
+                <a href="https://github.com/Dave-4u/expense-tracker" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
+              </div>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-meta">
-              <span class="tag">Java</span>
-              <span class="tag">Console</span>
+            <div class="project-image"><i class="fas fa-hand-rock"></i></div>
+            <div class="project-content">
+              <h3>Rock Paper Scissors</h3>
+              <p>Simple console-style game — rock, paper, or scissors against the computer, with score tracking.</p>
+              <div class="project-tech">
+                <span>C#</span><span>Console</span>
+              </div>
+              <div class="project-links">
+                <a href="projects/rock-paper-scissors/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
+                <a href="https://github.com/Dave-4u/csharp-rock-paper-scissors" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
+              </div>
             </div>
-            <h3>Number Guessing (Java)</h3>
-            <p>
-              Same number guessing game in Java — Scanner input, Random secret,
-              and a simple loop.
-            </p>
-            <div class="project-links">
-              <a href="projects/number-guessing/">Launch demo</a>
-              <a href="https://github.com/Dave-4u/java-number-guessing" target="_blank" rel="noopener noreferrer">Source</a>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image"><i class="fab fa-python"></i></div>
+            <div class="project-content">
+              <h3>Number Guessing (Python)</h3>
+              <p>Guess a random number from 1 to 100. The program says too high or too low until you get it.</p>
+              <div class="project-tech">
+                <span>Python</span><span>Console</span>
+              </div>
+              <div class="project-links">
+                <a href="projects/number-guessing/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
+                <a href="https://github.com/Dave-4u/python-number-guessing" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image"><i class="fab fa-java"></i></div>
+            <div class="project-content">
+              <h3>Number Guessing (Java)</h3>
+              <p>Same number guessing game in Java — Scanner input, Random secret, and a simple loop.</p>
+              <div class="project-tech">
+                <span>Java</span><span>Console</span>
+              </div>
+              <div class="project-links">
+                <a href="projects/number-guessing/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
+                <a href="https://github.com/Dave-4u/java-number-guessing" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
+              </div>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section section-alt" <section class="section section-alt" id="skills">
+    <section id="contact" class="contact">
       <div class="container">
-        <div class="section-head">
-          <h2>Skills</h2>
-          <p>Tools and topics from coursework, SIWES, and project work.</p>
-        </div>
-        <div class="skills-grid">
-          <div class="skill-card">
-            <h3>Programming</h3>
-            <p>Python, Java, JavaScript, Kotlin, C# (basic), HTML, and CSS.</p>
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+          <div class="contact-info">
+            <h3>Let's Connect</h3>
+            <p>Based in Port Harcourt, Nigeria. Open to graduate roles, internships, and collaborative software work.</p>
+            <div class="contact-item">
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:adegborodamilaredavid@gmail.com">adegborodamilaredavid@gmail.com</a>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-phone"></i>
+              <a href="tel:+2348101597428">+234 810 159 7428</a>
+            </div>
+            <div class="contact-item">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Port Harcourt, Nigeria</span>
+            </div>
           </div>
-          <div class="skill-card">
-            <h3>Mobile Development</h3>
-            <p>Kotlin, Jetpack Compose, and Firebase for Android application features and data.</p>
-          </div>
-          <div class="skill-card">
-            <h3>IT Support &amp; Hardware</h3>
-            <p>End-user support, software troubleshooting, and basic hardware diagnostics and maintenance.</p>
-          </div>
-          <div class="skill-card">
-            <h3>Networking</h3>
-            <p>Cisco Packet Tracer labs, network architecture basics, and connectivity troubleshooting.</p>
-          </div>
-          <div class="skill-card">
-            <h3>Cybersecurity</h3>
-            <p>Foundational ethical hacking concepts from structured IT training.</p>
-          </div>
-          <div class="skill-card">
-            <h3>Practice Projects</h3>
-            <p>Simple console games in C#, Python, and Java, plus small HTML/CSS/JS web apps.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="contact">
-      <div class="container narrow contact">
-        <h2>Contact</h2>
-        <p>
-          Based in Port Harcourt, Nigeria. Open to graduate roles, internships,
-          and collaborative software work.
-        </p>
-        <p>
-          <a href="tel:+2348101597428">+234 810 159 7428</a>
-          ·
-          <a href="mailto:adegborodamilaredavid@gmail.com">adegborodamilaredavid@gmail.com</a>
-        </p>
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="mailto:adegborodamilaredavid@gmail.com">Email</a>
-          <a class="btn btn-ghost" href="tel:+2348101597428">Call</a>
-          <a class="btn btn-ghost" href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer">GitHub</a>
-          <a class="btn btn-ghost" href="https://www.linkedin.com/in/adegboro-david-76a06a430/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <form class="contact-form" id="contact-form" action="mailto:adegborodamilaredavid@gmail.com" method="get" enctype="text/plain">
+            <div class="form-group">
+              <input type="text" name="name" id="contact-name" placeholder="Your Name" required />
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" id="contact-email" placeholder="Your Email" required />
+            </div>
+            <div class="form-group">
+              <input type="text" name="subject" id="contact-subject" placeholder="Subject" required />
+            </div>
+            <div class="form-group">
+              <textarea name="body" id="contact-message" placeholder="Your Message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <div class="container footer-inner">
-      <p>© <span id="year"></span> Adegboro David Oluwadamilare</p>
-      <a href="https://github.com/Dave-4u/Dave-4u.github.io" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <div class="footer-logo">
+            <i class="fas fa-code"></i>
+            <span>Adegboro David</span>
+          </div>
+          <p>Computer Science graduate building practical mobile, web, and IT solutions.</p>
+        </div>
+        <div class="footer-right">
+          <div class="footer-social">
+            <a href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/adegboro-david-76a06a430/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:adegborodamilaredavid@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Adegboro David Oluwadamilare. All rights reserved.</p>
+      </div>
     </div>
   </footer>
 
