@@ -1092,3 +1092,20 @@ a:hover {
     width: 100%;
   }
 }
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.skill-tags span {
+  background: rgba(0, 255, 136, 0.15);
+  color: #e6fff3;
+  border: 1px solid rgba(0, 255, 136, 0.3);
+  padding: 0.35rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}

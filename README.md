@@ -20,8 +20,8 @@ Personal portfolio for [Dave-4u](https://github.com/Dave-4u).
     └── number-guessing/
 ```
 
-Dark neon accent theme with animated background, skill bars, and project cards.
-RentWatch and language practice repos link out to GitHub; TellMe is overview-only.
+Dark neon accent theme with animated background, skill tags, and project cards.
+Language practice repos link out to GitHub; TellMe is overview-only.
 
 ## Local preview
 
