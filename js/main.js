@@ -1,12 +1,62 @@
 (function () {
-  var year = document.getElementById("year");
-  if (year) {
-    year.textContent = String(new Date().getFullYear());
+  "use strict";
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  var year = $("#year");
+  if (year) year.textContent = String(new Date().getFullYear());
+
+  /* Local time in Port Harcourt (WAT) */
+  var clock = $("#local-time");
+  function tick() {
+    if (!clock) return;
+    try {
+      clock.textContent = new Date().toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit", timeZone: "Africa/Lagos" });
+    } catch (e) { clock.parentNode.style.display = "none"; }
+  }
+  tick(); setInterval(tick, 30000);
+
+  /* Toast */
+  var toastEl = $("#toast"), toastTimer;
+  function toast(msg) {
+    if (!toastEl) return;
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove("show"); }, 2200);
   }
 
-  var navToggle = document.querySelector(".nav-toggle");
-  var navMenu = document.querySelector(".nav-menu");
+  /* Theme */
+  var root = document.documentElement;
+  var themeBtn = $("#theme-toggle");
+  function syncThemeBtn() {
+    var dark = root.getAttribute("data-theme") === "dark";
+    if (!themeBtn) return;
+    themeBtn.innerHTML = dark ? '<i class="fas fa-sun" aria-hidden="true"></i>' : '<i class="fas fa-moon" aria-hidden="true"></i>';
+    themeBtn.setAttribute("aria-label", dark ? "Switch to light theme" : "Switch to dark theme");
+    var meta = $('meta[name="theme-color"]');
+    if (meta) meta.setAttribute("content", dark ? "#161a17" : "#f5efe4");
+  }
+  function toggleTheme() {
+    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("dave-theme", next); } catch (e) {}
+    syncThemeBtn();
+    toast(next === "dark" ? "Lights off. Easier on the eyes." : "Lights on.");
+  }
+  syncThemeBtn();
+  if (themeBtn) themeBtn.addEventListener("click", toggleTheme);
 
+  /* Mobile nav */
+  var navToggle = $(".nav-toggle"), navMenu = $(".nav-menu");
+  function closeMenu() {
+    if (!navMenu) return;
+    navMenu.classList.remove("active");
+    navToggle.classList.remove("active");
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Open menu");
+  }
   if (navToggle && navMenu) {
     navToggle.addEventListener("click", function () {
       var open = navMenu.classList.toggle("active");
@@ -14,141 +64,153 @@
       navToggle.setAttribute("aria-expanded", open ? "true" : "false");
       navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
     });
-
-    navMenu.querySelectorAll(".nav-link").forEach(function (link) {
-      link.addEventListener("click", function () {
-        navMenu.classList.remove("active");
-        navToggle.classList.remove("active");
-        navToggle.setAttribute("aria-expanded", "false");
-        navToggle.setAttribute("aria-label", "Open menu");
-      });
-    });
+    $$(".nav-link", navMenu).forEach(function (l) { l.addEventListener("click", closeMenu); });
   }
 
-  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener("click", function (e) {
-      var href = anchor.getAttribute("href");
-      if (!href || href === "#") return;
-      var target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
-
-  var navbar = document.querySelector(".navbar");
-  window.addEventListener("scroll", function () {
-    if (!navbar) return;
-    if (window.scrollY > 100) {
-      navbar.style.background = "rgba(10, 10, 10, 0.98)";
-    } else {
-      navbar.style.background = "rgba(10, 10, 10, 0.95)";
-    }
-  });
-
-  var skillsObserver = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.querySelectorAll(".skill-progress").forEach(function (bar) {
-          var width = bar.getAttribute("data-width");
-          setTimeout(function () {
-            bar.style.width = width;
-          }, 150);
-        });
-        skillsObserver.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.35, rootMargin: "0px 0px -80px 0px" }
-  );
-
-  var skillsSection = document.querySelector(".skills");
-  if (skillsSection) {
-    skillsObserver.observe(skillsSection);
-  }
-
-  var animationObserver = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.style.animation = "fadeInUp 0.6s ease forwards";
-        animationObserver.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
-  );
-
-  document
-    .querySelectorAll(".service-card, .cert-card, .project-card, .stat")
-    .forEach(function (el) {
-      el.style.opacity = "0";
-      el.style.transform = "translateY(30px)";
-      animationObserver.observe(el);
-    });
-
-  function updateActiveNavItem() {
-    var sections = document.querySelectorAll("section[id]");
-    var navLinks = document.querySelectorAll(".nav-link");
-    var current = "";
-
-    sections.forEach(function (section) {
-      if (window.scrollY >= section.offsetTop - 200) {
-        current = section.getAttribute("id");
-      }
-    });
-
-    navLinks.forEach(function (link) {
-      link.classList.toggle("active", link.getAttribute("href") === "#" + current);
-    });
-  }
-
-  window.addEventListener("scroll", updateActiveNavItem);
-  updateActiveNavItem();
-
+  /* Scroll: nav border, progress bar, active link, back-to-top */
+  var navbar = $(".navbar"), bar = $(".read-progress span");
+  var sections = $$("main section[id]"), links = $$(".nav-link");
   var backToTop = document.createElement("button");
   backToTop.type = "button";
   backToTop.className = "back-to-top";
   backToTop.setAttribute("aria-label", "Back to top");
-  backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
+  backToTop.innerHTML = '<i class="fas fa-arrow-up" aria-hidden="true"></i>';
   document.body.appendChild(backToTop);
+  backToTop.addEventListener("click", function () { window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }); });
 
-  backToTop.addEventListener("click", function () {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
+  var ticking = false;
+  function onScroll() {
+    var y = window.scrollY;
+    if (navbar) navbar.classList.toggle("scrolled", y > 10);
+    var max = document.documentElement.scrollHeight - window.innerHeight;
+    if (bar) bar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
+    backToTop.classList.toggle("visible", y > 400);
+    var current = "";
+    sections.forEach(function (s) { if (y >= s.offsetTop - 160) current = s.id; });
+    links.forEach(function (l) {
+      var on = l.getAttribute("href") === "#" + current;
+      l.classList.toggle("active", on);
+      if (on) l.setAttribute("aria-current", "true"); else l.removeAttribute("aria-current");
+    });
+    ticking = false;
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
 
-  window.addEventListener("scroll", function () {
-    if (window.scrollY > 300) {
-      backToTop.classList.add("visible");
-    } else {
-      backToTop.classList.remove("visible");
-    }
-  });
-
-  var contactForm = document.getElementById("contact-form");
-  if (contactForm) {
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-      var name = document.getElementById("contact-name").value.trim();
-      var email = document.getElementById("contact-email").value.trim();
-      var subject = document.getElementById("contact-subject").value.trim();
-      var message = document.getElementById("contact-message").value.trim();
-
-      var body =
-        "Name: " +
-        name +
-        "\nEmail: " +
-        email +
-        "\n\n" +
-        message;
-
-      var mailto =
-        "mailto:adegborodamilaredavid@gmail.com" +
-        "?subject=" +
-        encodeURIComponent(subject || "Portfolio contact") +
-        "&body=" +
-        encodeURIComponent(body);
-
-      window.location.href = mailto;
+  /* Reveal on scroll */
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+    $$(".service, .skill-category, .timeline-item, .project-row, .stat, .contact-form").forEach(function (el, i) {
+      el.classList.add("reveal");
+      el.style.transitionDelay = (i % 3) * 70 + "ms";
+      io.observe(el);
     });
   }
+
+  /* Project filter */
+  var chips = $$(".chip"), rows = $$(".project-row");
+  chips.forEach(function (chip) {
+    chip.addEventListener("click", function () {
+      var f = chip.getAttribute("data-filter");
+      chips.forEach(function (c) {
+        var on = c === chip;
+        c.classList.toggle("is-active", on);
+        c.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+      rows.forEach(function (r) {
+        var show = f === "all" || r.getAttribute("data-kind") === f;
+        r.classList.toggle("is-hidden", !show);
+        if (show) { r.classList.add("in"); }
+      });
+    });
+  });
+
+  /* Copy buttons */
+  function copy(text, btn) {
+    var done = function () {
+      toast("Copied " + text);
+      if (btn) {
+        btn.classList.add("done"); btn.textContent = "Copied";
+        setTimeout(function () { btn.classList.remove("done"); btn.textContent = "Copy"; }, 1600);
+      }
+    };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done, function () { toast("Couldn't copy, but it's right there to select."); });
+    } else {
+      var t = document.createElement("textarea");
+      t.value = text; document.body.appendChild(t); t.select();
+      try { document.execCommand("copy"); done(); } catch (e) { toast("Couldn't copy, but it's right there to select."); }
+      document.body.removeChild(t);
+    }
+  }
+  $$(".copy-btn").forEach(function (b) { b.addEventListener("click", function () { copy(b.getAttribute("data-copy"), b); }); });
+
+  /* Contact form → mailto with friendly validation */
+  var form = $("#contact-form"), err = $("#form-error"), msg = $("#contact-message"), count = $("#char-count");
+  if (msg && count) {
+    msg.addEventListener("input", function () {
+      var n = msg.value.trim().length;
+      count.textContent = n ? n + " chars" : "";
+    });
+  }
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var fields = [
+        ["contact-name", "your name"],
+        ["contact-email", "your email"],
+        ["contact-subject", "a subject"],
+        ["contact-message", "a short message"]
+      ];
+      var missing = [];
+      fields.forEach(function (f) {
+        var el = document.getElementById(f[0]);
+        var bad = !el.value.trim() || (el.type === "email" && !/^\S+@\S+\.\S+$/.test(el.value.trim()));
+        el.setAttribute("aria-invalid", bad ? "true" : "false");
+        if (bad) missing.push(f);
+      });
+      if (missing.length) {
+        err.textContent = "Almost there. Please add " + missing.map(function (m) { return m[1]; }).join(", ") + ".";
+        document.getElementById(missing[0][0]).focus();
+        return;
+      }
+      err.textContent = "";
+      var name = $("#contact-name").value.trim();
+      var email = $("#contact-email").value.trim();
+      var subject = $("#contact-subject").value.trim();
+      var body = "Name: " + name + "\nEmail: " + email + "\n\n" + msg.value.trim();
+      toast("Opening your email app…");
+      window.location.href = "mailto:adegborodamilaredavid@gmail.com?subject=" +
+        encodeURIComponent(subject || "Portfolio contact") + "&body=" + encodeURIComponent(body);
+    });
+    $$("input, textarea", form).forEach(function (el) {
+      el.addEventListener("input", function () { if (el.value.trim()) el.setAttribute("aria-invalid", "false"); });
+    });
+  }
+
+  /* Keyboard shortcuts */
+  var dialog = $("#kbd-dialog");
+  function openDialog() { if (dialog && dialog.showModal && !dialog.open) dialog.showModal(); }
+  var kbdOpen = $("#kbd-open");
+  if (kbdOpen) kbdOpen.addEventListener("click", openDialog);
+  var order = ["about", "services", "skills", "experience", "projects", "contact"];
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var tag = (e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea" || e.target.isContentEditable) return;
+    if (e.key === "?") { e.preventDefault(); openDialog(); return; }
+    if (e.key === "t" || e.key === "T") { toggleTheme(); return; }
+    if (e.key === "c" || e.key === "C") { copy("adegborodamilaredavid@gmail.com"); return; }
+    var n = parseInt(e.key, 10);
+    if (n >= 1 && n <= 6) {
+      var target = document.getElementById(order[n - 1]);
+      if (target) target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+    }
+  });
 })();

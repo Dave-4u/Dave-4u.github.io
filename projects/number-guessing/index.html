@@ -3,102 +3,230 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Number Guessing · Preview</title>
-  <link rel="stylesheet" href="../../css/styles.css" />
+  <title>Hot or Cold · Number Guessing (Python &amp; Java edition)</title>
+  <meta name="description" content="I'm thinking of a number from 1 to 100. A browser version of Dave's Python &amp; Java console game, with a number line that shrinks as you close in." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%23231f1a'/%3E%3Ctext x='32' y='44' font-family='monospace' font-size='30' font-weight='700' text-anchor='middle' fill='%23ff7a3d'%3E%3F%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
   <style>
-    .game-box {
-      margin-top: 1.5rem;
-      padding: 1.25rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(0,0,0,0.25);
+    :root {
+      --bg: #fff7ea; --card: #fffdf8; --ink: #231f1a; --ink-2: #5a5249; --muted: #8b8276; --line: #eadfcb;
+      --accent: #d9603b; --cold: #3b82c4; --cool: #58a7a0; --warm: #f0a030; --hot: #e2482d;
+      --display: "Rubik", system-ui, sans-serif; --mono: "Space Mono", ui-monospace, monospace;
     }
-    .game-box .prompt { font-family: "IBM Plex Mono", monospace; margin-bottom: 0.75rem; color: #9ae6b4; }
-    .row { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-bottom: 1rem; }
-    .row input {
-      flex: 1;
-      min-width: 8rem;
-      padding: 0.65rem 0.85rem;
-      border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(0,0,0,0.35);
-      color: inherit;
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 1rem;
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body { font-family: var(--display); color: var(--ink); background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; }
+    button, input { font: inherit; color: inherit; }
+    :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 10px; }
+    .top { display: flex; justify-content: space-between; align-items: center; padding: 1.1rem clamp(1rem, 4vw, 2.5rem); }
+    .brand { display: flex; align-items: center; gap: .6rem; font-weight: 800; letter-spacing: -.02em; font-size: 1.15rem; text-decoration: none; color: var(--ink); }
+    .brand i { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 11px; background: var(--ink); color: var(--accent); font: 700 1.2rem var(--mono); font-style: normal; }
+    .edition { font: 400 .78rem var(--mono); color: var(--muted); border: 1px dashed var(--line); padding: .25rem .55rem; border-radius: 6px; }
+    main { flex: 1; width: min(980px, 100% - 2rem); margin: 0 auto; display: grid; grid-template-columns: 1fr 120px; gap: 2rem; align-items: start; padding: 1rem 0 3rem; }
+    .card { background: var(--card); border: 1.5px solid var(--ink); border-radius: 24px; padding: clamp(1.4rem, 4vw, 2.4rem); box-shadow: 8px 8px 0 var(--ink); }
+    .kicker { font: 400 .85rem var(--mono); color: var(--muted); margin: 0 0 .5rem; }
+    h1 { margin: 0; font-weight: 800; font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.02; letter-spacing: -.035em; }
+    .msg { min-height: 3.2em; margin: 1rem 0 1.4rem; font-size: 1.15rem; color: var(--ink-2); transition: color .3s; }
+    .msg b { color: var(--ink); }
+    .row { display: flex; gap: .7rem; flex-wrap: wrap; }
+    .guess-input { flex: 1; min-width: 9rem; font: 700 2.2rem var(--mono); padding: .5rem 1rem; border-radius: 16px; border: 2px solid var(--line); background: var(--bg); text-align: center; transition: border-color .2s, transform .2s; -moz-appearance: textfield; }
+    .guess-input::-webkit-outer-spin-button, .guess-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .guess-input:focus { outline: none; border-color: var(--ink); }
+    .guess-input.shake { animation: shake .35s; border-color: var(--hot); }
+    @keyframes shake { 20%, 60% { transform: translateX(-6px); } 40%, 80% { transform: translateX(6px); } }
+    .btn { border: 2px solid var(--ink); border-radius: 16px; padding: .85rem 1.4rem; font-weight: 700; cursor: pointer; background: var(--ink); color: #fff; transition: transform .12s, box-shadow .12s, background .2s; box-shadow: 0 4px 0 var(--accent); }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--accent); }
+    .btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--accent); }
+    .btn.ghost { background: transparent; color: var(--ink); box-shadow: none; }
+    .btn.ghost:hover { background: var(--bg); }
+    .meter { margin-top: 1.6rem; }
+    .meter-label { display: flex; justify-content: space-between; font: 400 .8rem var(--mono); color: var(--muted); margin-bottom: .4rem; }
+    .thermo { height: 14px; border-radius: 999px; background: linear-gradient(90deg, var(--cold), var(--cool), var(--warm), var(--hot)); position: relative; }
+    .thermo-dot { position: absolute; top: 50%; left: 0%; width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 3px solid var(--ink); transform: translate(-50%, -50%); transition: left .6s cubic-bezier(.3,1.4,.5,1); }
+    .history { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: 1.4rem; min-height: 2rem; padding: 0; list-style: none; }
+    .history li { font: 700 .9rem var(--mono); padding: .3rem .6rem; border-radius: 8px; color: #fff; animation: pop .3s cubic-bezier(.3,1.6,.5,1); }
+    .history li span { font-weight: 400; opacity: .85; margin-left: .2rem; }
+    .history .empty { color: var(--muted); background: none; font-weight: 400; padding-left: 0; animation: none; }
+    @keyframes pop { from { transform: scale(.5); opacity: 0; } }
+    .stats { display: flex; gap: 1.6rem; margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1.5px dashed var(--line); flex-wrap: wrap; }
+    .stat b { display: block; font: 700 1.5rem var(--mono); }
+    .stat span { color: var(--muted); font-size: .85rem; }
+    /* number line */
+    .line { position: sticky; top: 1rem; height: min(78vh, 640px); border-radius: 18px; border: 1.5px solid var(--ink); background: var(--card); padding: .5rem; display: grid; grid-template-rows: repeat(100, 1fr); gap: 1px; }
+    .line .n { border-radius: 2px; background: var(--line); transition: background .4s, opacity .4s; position: relative; }
+    .line .n.tick::after { opacity: 1 !important; }
+    .line .n.out { opacity: .18; }
+    .line .n.in { background: var(--accent); opacity: .55; }
+    .line .n.tick::after { content: attr(data-n); position: absolute; right: calc(100% + 6px); top: 50%; transform: translateY(-50%); font: 400 .65rem var(--mono); color: var(--muted); }
+    .line .n.guessed { background: var(--ink); opacity: 1; }
+    .line .n.win { background: var(--hot); opacity: 1; box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--hot); }
+    .line-wrap { position: relative; padding-left: 26px; }
+    .line-cap { font: 400 .75rem var(--mono); color: var(--muted); text-align: center; margin-top: .5rem; }
+    .confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; }
+    .confetti i { position: absolute; top: -12px; width: 10px; height: 14px; border-radius: 2px; animation: fall 1.6s ease-in forwards; }
+    @keyframes fall { to { transform: translateY(105vh) rotate(540deg); opacity: .8; } }
+    footer { text-align: center; padding: 1.2rem; color: var(--muted); font-size: .88rem; }
+    footer a { color: var(--ink-2); }
+    kbd { font: 400 .75rem var(--mono); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 5px; padding: .05rem .35rem; background: var(--card); }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+    @media (max-width: 720px) {
+      main { grid-template-columns: 1fr; }
+      .line-wrap { order: -1; padding-left: 0; }
+      .line { position: static; height: 46px; grid-template-rows: none; grid-template-columns: repeat(100, 1fr); }
+      .line .n.tick::after { display: none; }
+      .card { box-shadow: 5px 5px 0 var(--ink); }
     }
-    .log {
-      font-family: "IBM Plex Mono", monospace;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      min-height: 4rem;
-      white-space: pre-wrap;
-    }
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
   </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a class="logo" href="../../">Dave<span class="logo-dot">.</span></a>
-      <nav class="nav" aria-label="Primary">
-        <a href="../../#projects">Projects</a>
-        <a href="https://github.com/Dave-4u/python-number-guessing" target="_blank" rel="noopener noreferrer">Python</a>
-        <a href="https://github.com/Dave-4u/java-number-guessing" target="_blank" rel="noopener noreferrer">Java</a>
-      </nav>
-    </div>
+  <header class="top">
+    <a class="brand" href="./"><i aria-hidden="true">?</i> Hot or Cold</a>
+    <span class="edition">Python &amp; Java edition · browser port</span>
   </header>
-  <main id="main" class="section">
-    <div class="container narrow">
-      <p class="eyebrow">Browser preview · same idea as the Python and Java console games</p>
-      <h1>Number Guessing</h1>
-      <p class="lead">I picked a number from 1 to 100. Guess until you hit it. Too high / too low hints along the way.</p>
 
-      <div class="game-box">
-        <p class="prompt">Your guess:</p>
-        <form class="row" id="form">
-          <input id="guess" type="number" min="1" max="100" placeholder="1–100" required />
-          <button class="btn btn-primary" type="submit">Guess</button>
-          <button class="btn btn-ghost" type="button" id="newGame">New number</button>
-        </form>
-        <div class="log" id="log">Enter a number and press Guess.</div>
+  <main>
+    <section class="card" aria-labelledby="title">
+      <p class="kicker" id="round-label">Round 1</p>
+      <h1 id="title">I'm thinking of a number from 1 to 100.</h1>
+      <p class="msg" id="msg" aria-live="polite">Take a guess. I'll tell you if you're too high or too low, and how warm you're getting.</p>
+
+      <form class="row" id="form" autocomplete="off">
+        <label for="guess" class="sr-only">Your guess (1 to 100)</label>
+        <input class="guess-input" id="guess" type="number" inputmode="numeric" min="1" max="100" placeholder="50" required autofocus />
+        <button class="btn" type="submit">Guess</button>
+        <button class="btn ghost" type="button" id="again" title="New number (N)">New number</button>
+      </form>
+
+      <div class="meter" aria-hidden="true">
+        <div class="meter-label"><span>freezing</span><span>warm</span><span>on fire</span></div>
+        <div class="thermo"><div class="thermo-dot" id="dot"></div></div>
       </div>
 
-      <p style="margin-top:1.5rem"><a class="btn btn-ghost" href="../../">Back to portfolio</a></p>
+      <ul class="history" id="history" aria-label="Your guesses so far"><li class="empty">Your guesses will line up here.</li></ul>
+
+      <div class="stats">
+        <div class="stat"><b id="tries">0</b><span>tries this round</span></div>
+        <div class="stat"><b id="best">–</b><span>your best</span></div>
+        <div class="stat"><b id="wins">0</b><span>numbers found</span></div>
+      </div>
+    </section>
+
+    <div class="line-wrap">
+      <div class="line" id="line" aria-hidden="true"></div>
+      <p class="line-cap" id="range">1 – 100 still possible</p>
     </div>
   </main>
-  <script>
-    let secret = 0;
-    let tries = 0;
-    const log = document.getElementById("log");
-    const input = document.getElementById("guess");
 
-    function newSecret() {
-      secret = Math.floor(Math.random() * 100) + 1;
-      tries = 0;
-      log.textContent = "New game. Guess a number from 1 to 100.";
-      input.value = "";
-      input.focus();
+  <footer>
+    <kbd>Enter</kbd> guess · <kbd>N</kbd> new number · <kbd>↑</kbd><kbd>↓</kbd> nudge ·
+    Original console game: <a href="https://github.com/Dave-4u/python-number-guessing">Python</a> / <a href="https://github.com/Dave-4u/java-number-guessing">Java</a> · by <a href="https://dave-4u.github.io/">Dave Adegboro</a>
+  </footer>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <script>
+  (function () {
+    "use strict";
+    var KEY = "hot-or-cold-pf";
+    var $ = function (id) { return document.getElementById(id); };
+    var input = $("guess"), msg = $("msg"), hist = $("history"), line = $("line"), dot = $("dot");
+    var secret, tries, lo, hi, guesses, done;
+    var saved = {}; try { saved = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+    var best = saved.best || null, wins = saved.wins || 0, round = (saved.round || 0);
+
+    for (var i = 1; i <= 100; i++) {
+      var d = document.createElement("div");
+      d.className = "n" + (i === 1 || i % 25 === 0 ? " tick" : "");
+      d.setAttribute("data-n", i);
+      line.appendChild(d);
+    }
+    var cells = line.children;
+
+    function persist() { try { localStorage.setItem(KEY, JSON.stringify({ best: best, wins: wins, round: round })); } catch (e) {} }
+    function heat(diff) { return diff <= 2 ? ["on fire", "var(--hot)"] : diff <= 6 ? ["hot", "var(--hot)"] : diff <= 12 ? ["warm", "var(--warm)"] : diff <= 25 ? ["cool", "var(--cool)"] : ["cold", "var(--cold)"]; }
+
+    function paint() {
+      for (var i = 1; i <= 100; i++) {
+        var c = cells[i - 1];
+        c.className = "n" + (i === 1 || i % 25 === 0 ? " tick" : "") + (i < lo || i > hi ? " out" : " in") + (guesses.indexOf(i) > -1 ? " guessed" : "") + (done && i === secret ? " win" : "");
+      }
+      $("range").textContent = done ? "Found it: " + secret : lo === hi ? "It has to be " + lo + "…" : lo + " – " + hi + " still possible";
+      $("tries").textContent = tries;
+      $("best").textContent = best ? best : "–";
+      $("wins").textContent = wins;
     }
 
-    document.getElementById("form").addEventListener("submit", (e) => {
-      e.preventDefault();
-      const guess = Number(input.value);
-      if (!Number.isInteger(guess) || guess < 1 || guess > 100) {
-        log.textContent = "Please enter a whole number from 1 to 100.";
-        return;
+    function newGame() {
+      secret = Math.floor(Math.random() * 100) + 1;
+      tries = 0; lo = 1; hi = 100; guesses = []; done = false; round++;
+      persist();
+      $("round-label").textContent = "Round " + round;
+      msg.innerHTML = round > 1 ? "New number. Same rules. Fresh luck." : "Take a guess. I'll tell you if you're too high or too low, and how warm you're getting.";
+      hist.innerHTML = '<li class="empty">Your guesses will line up here.</li>';
+      dot.style.left = "0%";
+      input.value = ""; input.disabled = false; input.focus();
+      paint();
+    }
+
+    function burst() {
+      var box = $("confetti"), colors = ["#e2482d", "#f0a030", "#58a7a0", "#3b82c4", "#231f1a"];
+      for (var i = 0; i < 70; i++) {
+        var p = document.createElement("i");
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.background = colors[i % colors.length];
+        p.style.animationDelay = Math.random() * .4 + "s";
+        p.style.transform = "rotate(" + Math.random() * 360 + "deg)";
+        box.appendChild(p);
       }
-      tries++;
-      if (guess < secret) {
-        log.textContent = guess + " — too low.\nTries: " + tries;
-      } else if (guess > secret) {
-        log.textContent = guess + " — too high.\nTries: " + tries;
-      } else {
-        log.textContent = "Correct! " + guess + " in " + tries + " tries.\nPress New number to play again.";
-      }
+      setTimeout(function () { box.innerHTML = ""; }, 2400);
+    }
+
+    function reject(text) {
+      msg.innerHTML = text;
+      input.classList.remove("shake"); void input.offsetWidth; input.classList.add("shake");
       input.select();
+    }
+
+    $("form").addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (done) return newGame();
+      var raw = input.value.trim(), g = Number(raw);
+      if (!raw || !Number.isInteger(g) || g < 1 || g > 100) return reject("Whole numbers from <b>1</b> to <b>100</b> only, please.");
+      if (guesses.indexOf(g) > -1) return reject("You already tried <b>" + g + "</b>. It's still not that one.");
+      tries++; guesses.push(g);
+      var diff = Math.abs(g - secret), h = heat(diff);
+      dot.style.left = Math.max(2, Math.min(98, 100 - diff * 2.5)) + "%";
+      if (hist.querySelector(".empty")) hist.innerHTML = "";
+      var li = document.createElement("li");
+      li.style.background = g === secret ? "var(--ink)" : h[1];
+      li.innerHTML = g + "<span>" + (g === secret ? "✓" : g < secret ? "↑" : "↓") + "</span>";
+      li.setAttribute("aria-label", g + (g === secret ? " correct" : g < secret ? " too low" : " too high"));
+      hist.appendChild(li);
+      if (g === secret) {
+        done = true; wins++;
+        var record = !best || tries < best;
+        if (record) best = tries;
+        persist();
+        msg.innerHTML = "<b>" + g + "!</b> You got it in <b>" + tries + "</b> " + (tries === 1 ? "try. Are you reading my mind?" : "tries.") + (record && wins > 1 ? " New personal best." : "") + " Press Enter to play again.";
+        input.disabled = true;
+        burst();
+        setTimeout(function () { $("again").focus(); }, 50);
+      } else {
+        if (g < secret) lo = Math.max(lo, g + 1); else hi = Math.min(hi, g - 1);
+        msg.innerHTML = "<b>" + g + "</b> is too " + (g < secret ? "low" : "high") + ". You're <b>" + h[0] + "</b>." + (tries === 7 ? " Tip: halve the range each time and you'll never need more than 7." : "");
+        input.value = ""; input.focus();
+      }
+      paint();
     });
 
-    document.getElementById("newGame").addEventListener("click", newSecret);
-    newSecret();
+    $("again").addEventListener("click", newGame);
+    document.addEventListener("keydown", function (e) {
+      if ((e.key === "n" || e.key === "N") && document.activeElement !== input) { e.preventDefault(); newGame(); }
+    });
+    newGame();
+  })();
   </script>
 </body>
 </html>

@@ -1,183 +1,192 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Adegboro David Oluwadamilare (Dave): AI Trainer, Data Annotator, AI Response Evaluator, and Research &amp; Virtual Assistant. B.Sc. Computer Science, Second Class Upper (Elizade University, 2026). Available for remote, freelance, and contract work." />
+  <meta name="theme-color" content="#f5efe4" />
+  <meta property="og:title" content="Dave Adegboro · Portfolio" />
+  <meta property="og:description" content="AI Trainer · Data Annotator · AI Response Evaluator · Research &amp; Virtual Assistant" />
+  <meta property="og:image" content="https://dave-4u.github.io/assets/profile.jpg" />
   <title>Dave Adegboro · Portfolio</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Source+Sans+3:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/styles.css" />
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("dave-theme");
+        var dark = saved ? saved === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+        document.documentElement.setAttribute("data-theme", dark ? "dark" : "light");
+      } catch (e) {}
+    })();
+  </script>
 </head>
 <body>
-  <div class="background-animation" aria-hidden="true">
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-    <div class="wave"></div>
-  </div>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <nav class="navbar" aria-label="Primary">
+  <header class="navbar" aria-label="Primary">
     <div class="nav-container">
-      <a class="logo" href="#home">
-        <i class="fas fa-code"></i>
-        <span>Dave.</span>
+      <a class="logo" href="#home" aria-label="Dave, back to top">
+        <span class="logo-mark" aria-hidden="true">D</span>
+        <span>Dave<span class="logo-dot">.</span></span>
       </a>
-      <ul class="nav-menu">
-        <li><a href="#home" class="nav-link">Home</a></li>
-        <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#services" class="nav-link">What I Do</a></li>
-        <li><a href="#skills" class="nav-link">Skills</a></li>
-        <li><a href="#experience" class="nav-link">Experience</a></li>
-        <li><a href="#projects" class="nav-link">Projects</a></li>
-        <li><a href="#contact" class="nav-link">Contact</a></li>
-      </ul>
-      <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#home" class="nav-link">Home</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#services" class="nav-link">What I Do</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="theme-toggle" type="button" aria-label="Switch to dark theme" title="Toggle theme (T)">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </button>
+        <button class="nav-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
+      </div>
     </div>
-  </nav>
+    <div class="read-progress" aria-hidden="true"><span></span></div>
+  </header>
 
-  <main>
+  <main id="main">
     <section id="home" class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <div class="hero-text">
-            <p class="hero-greeting">Hello, I'm</p>
-            <h1 class="hero-name">Adegboro David</h1>
-            <p class="hero-title">AI Trainer | Data Annotator | AI Response Evaluator | Research &amp; Virtual Assistant</p>
-            <p class="hero-description">
-              Computer Science graduate (Second Class Upper, Elizade University, 2026) based in Port Harcourt.
-              Careful with guidelines, accurate with records, and clear in written feedback.
-              Available for full-time, remote, freelance, and contract work.
-            </p>
-            <div class="hero-buttons">
-              <a class="cta-button" href="#contact">
-                <i class="fas fa-envelope"></i> Let's Connect
-              </a>
-              <a class="secondary-button" href="assets/Adegboro_David_Oluwadamilare_CV.pdf" download="Adegboro_David_Oluwadamilare_CV.pdf">
-                <i class="fas fa-download"></i> Download CV
-              </a>
-            </div>
-            <div class="social-links">
-              <span>Find me on</span>
-              <a href="https://github.com/Dave-4u" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                <i class="fab fa-github"></i>
-              </a>
-              <a href="https://www.linkedin.com/in/adegboro-david-76a06a430/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-              </a>
-            </div>
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <p class="hero-greeting"><span class="status-dot" aria-hidden="true"></span> Hello, I'm</p>
+          <h1 class="hero-name">Adegboro David</h1>
+          <p class="hero-title">
+            <span>AI Trainer</span><span>Data Annotator</span><span>AI Response Evaluator</span><span>Research &amp; Virtual Assistant</span>
+          </p>
+          <p class="hero-description">
+            Computer Science graduate (<mark class="note" data-note="2:1">Second Class Upper, Elizade University, 2026</mark>) based in Port Harcourt.
+            Careful with guidelines, accurate with records, and clear in written feedback.
+            Available for full-time, remote, freelance, and contract work.
+          </p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#contact"><i class="fas fa-envelope" aria-hidden="true"></i> Let's Connect</a>
+            <a class="btn btn-ghost" href="assets/Adegboro_David_Oluwadamilare_CV.pdf" download="Adegboro_David_Oluwadamilare_CV.pdf"><i class="fas fa-download" aria-hidden="true"></i> Download CV</a>
           </div>
-          <div class="hero-image">
-            <div class="image-container photo">
-              <img src="assets/profile.jpg" alt="Adegboro David Oluwadamilare" width="500" height="630" loading="eager">
-            </div>
+          <div class="social-links">
+            <span>Find me on</span>
+            <a href="https://github.com/Dave-4u" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/adegboro-david-76a06a430/" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
           </div>
         </div>
+        <figure class="hero-image">
+          <div class="photo-frame">
+            <img src="assets/profile.jpg" alt="Adegboro David Oluwadamilare" width="500" height="630" loading="eager" />
+          </div>
+          <figcaption class="photo-tag">Port Harcourt, NG <span aria-hidden="true">·</span> <span id="local-time">--:--</span> WAT</figcaption>
+        </figure>
       </div>
     </section>
 
     <section id="about" class="about">
-      <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <div class="about-content">
-          <div class="about-text">
-            <p>
-              I'm Adegboro David Oluwadamilare (Dave), a Computer Science graduate with a
-              Second Class Upper (2:1) from Elizade University (2026). I spent six months in
-              corporate ICT support with Jevi Austin International Company Ltd at the Oando
-              Energy Resources project site.
-            </p>
-            <p>
-              That work taught me to follow set procedures, keep accurate records, explain
-              technical issues in plain language, and escalate problems correctly. These are the
-              same habits that data annotation, AI response evaluation, content moderation, and
-              search quality rating depend on.
-            </p>
-            <p>
-              I can read and assess code in Python, Java, JavaScript, and Kotlin, research
-              unfamiliar topics, and give clear, structured written feedback. I'm available for
-              full-time, remote, freelance, and contract work.
-            </p>
-            <p class="education-line">
-              <strong>Education:</strong> B.Sc. Computer Science, Elizade University,
-              Second Class Upper (2:1), Class of 2026 &middot; <strong>NYSC:</strong> Awaiting mobilisation (2026)
-            </p>
-            <div class="stats">
-              <div class="stat">
-                <h3>6</h3>
-                <p>Months ICT Support</p>
-              </div>
-              <div class="stat">
-                <h3>2:1</h3>
-                <p>Second Class Upper</p>
-              </div>
-              <div class="stat">
-                <h3>6</h3>
-                <p>Featured Projects</p>
-              </div>
-            </div>
-          </div>
+      <div class="container about-grid">
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">01</p>
+          <h2 class="section-title">About Me</h2>
+        </header>
+        <div class="about-text">
+          <p class="lede">
+            I'm Adegboro David Oluwadamilare (Dave), a Computer Science graduate with a
+            <mark class="note" data-note="degree">Second Class Upper (2:1) from Elizade University (2026)</mark>. I spent six months in
+            corporate ICT support with Jevi Austin International Company Ltd at the Oando
+            Energy Resources project site.
+          </p>
+          <p>
+            That work taught me to follow set procedures, keep accurate records, explain
+            technical issues in plain language, and escalate problems correctly. These are the
+            same habits that data annotation, AI response evaluation, content moderation, and
+            search quality rating depend on.
+          </p>
+          <p>
+            I can read and assess code in Python, Java, JavaScript, and Kotlin, research
+            unfamiliar topics, and give clear, structured written feedback. I'm available for
+            full-time, remote, freelance, and contract work.
+          </p>
+          <p class="education-line">
+            <strong>Education:</strong> B.Sc. Computer Science, Elizade University,
+            Second Class Upper (2:1), Class of 2026 &middot; <strong>NYSC:</strong> Awaiting mobilisation (2026)
+          </p>
+          <dl class="stats">
+            <div class="stat"><dt><span class="count" data-to="6">6</span></dt><dd>Months ICT Support</dd></div>
+            <div class="stat"><dt>2:1</dt><dd>Second Class Upper</dd></div>
+            <div class="stat"><dt><span class="count" data-to="6">6</span></dt><dd>Featured Projects</dd></div>
+          </dl>
         </div>
       </div>
     </section>
 
     <section id="services" class="services">
       <div class="container">
-        <h2 class="section-title">What I Do</h2>
-        <p class="section-subtitle">Areas I focus on</p>
-        <div class="services-grid">
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-robot"></i></div>
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">02</p>
+          <h2 class="section-title">What I Do</h2>
+          <p class="section-subtitle">Areas I focus on</p>
+        </header>
+        <ol class="services-list">
+          <li class="service">
+            <div class="service-icon" aria-hidden="true"><i class="fas fa-robot"></i></div>
             <h3>AI Training &amp; Evaluation</h3>
             <p>Data annotation, rating written and code responses against task guidelines, accuracy and consistency checks, fact-checking, and structured written feedback.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-search"></i></div>
+          </li>
+          <li class="service">
+            <div class="service-icon" aria-hidden="true"><i class="fas fa-search"></i></div>
             <h3>Research &amp; Writing</h3>
             <p>Online research and source verification, summarising technical content, report writing, and clear step-by-step documentation in plain English.</p>
-          </div>
-          <div class="service-card">
-            <div class="service-icon"><i class="fas fa-headset"></i></div>
+          </li>
+          <li class="service">
+            <div class="service-icon" aria-hidden="true"><i class="fas fa-headset"></i></div>
             <h3>Virtual Assistance &amp; IT Support</h3>
             <p>Data entry and record keeping, Microsoft Office, Outlook and OneDrive, plus end-user technical support and Windows setup and troubleshooting.</p>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
 
     <section id="skills" class="skills">
       <div class="container">
-        <h2 class="section-title">Skills</h2>
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">03</p>
+          <h2 class="section-title">Skills</h2>
+          <p class="section-subtitle">Hover or tab through a group to see it in focus.</p>
+        </header>
         <div class="skills-grid">
-          <div class="skill-category">
+          <div class="skill-category" tabindex="0">
             <h3>AI and Data Work</h3>
             <div class="skill-tags">
               <span>Following detailed task guidelines</span><span>Accuracy and consistency checks</span><span>Fact-checking and source verification</span><span>Evaluating written and code responses</span><span>Structured written feedback</span>
             </div>
           </div>
-          <div class="skill-category">
+          <div class="skill-category" tabindex="0">
             <h3>Research and Writing</h3>
             <div class="skill-tags">
               <span>Online research</span><span>Summarising technical content</span><span>Report writing</span><span>Step-by-step documentation</span><span>Clear written English</span>
             </div>
           </div>
-          <div class="skill-category">
+          <div class="skill-category" tabindex="0">
             <h3>Review and Moderation</h3>
             <div class="skill-tags">
               <span>Following set procedures</span><span>Spotting errors and inconsistencies</span><span>Basic awareness of phishing, MITM attacks, malicious payloads, scams, and harmful content</span><span>Escalation</span><span>Confidential data handling</span>
             </div>
           </div>
-          <div class="skill-category">
+          <div class="skill-category" tabindex="0">
             <h3>Technical Skills</h3>
             <div class="skill-tags">
               <span>Python</span><span>Java</span><span>JavaScript</span><span>Kotlin</span><span>Jetpack Compose</span><span>Firebase</span><span>HTML</span><span>CSS</span><span>C# (basic)</span><span>Git/GitHub</span><span>Windows setup and troubleshooting</span><span>Networking fundamentals (Cisco Packet Tracer)</span>
             </div>
           </div>
-          <div class="skill-category">
+          <div class="skill-category" tabindex="0">
             <h3>Virtual Assistance and Tools</h3>
             <div class="skill-tags">
               <span>Microsoft Office (Word, Excel, PowerPoint)</span><span>Outlook</span><span>OneDrive</span><span>End-user technical support</span><span>Data entry and record keeping</span>
@@ -189,197 +198,219 @@
 
     <section id="experience" class="experience">
       <div class="container">
-        <h2 class="section-title">Experience</h2>
-        <p class="section-subtitle">Placements and volunteer work</p>
-        <div class="cert-grid">
-          <div class="cert-card">
-            <div class="cert-icon"><i class="fas fa-building"></i></div>
-            <h3>ICT Intern (SIWES)</h3>
-            <p><strong>Jevi Austin International Company Ltd</strong>, Oando Project Site, Port Harcourt</p>
-            <p>Provided first-level technical support, explaining issues and fixes clearly to non-technical users and escalating complex cases. Installed and configured Windows 10/11, imaged systems, and set up Outlook and OneDrive for staff. Kept accurate daily logs and followed standard operating procedures. Diagnosed and replaced faulty hardware. Commended by supervisors for punctuality, willingness to learn, and attention to detail.</p>
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">04</p>
+          <h2 class="section-title">Experience</h2>
+          <p class="section-subtitle">Placements and volunteer work</p>
+        </header>
+        <ol class="timeline">
+          <li class="timeline-item">
             <span class="cert-date">April 2025 – October 2025</span>
-          </div>
-          <div class="cert-card">
-            <div class="cert-icon"><i class="fas fa-shield-alt"></i></div>
-            <h3>IT Intern</h3>
-            <p><strong>Rewod Technologies</strong>, Port Harcourt</p>
-            <p>Three-month placement. Completed introductory training in cybersecurity and ethical hacking concepts, and gained basic awareness of phishing, social engineering, man-in-the-middle (MITM) attacks, malicious payloads, and common online threats.</p>
+            <div class="timeline-body">
+              <h3><i class="fas fa-building" aria-hidden="true"></i> ICT Intern (SIWES)</h3>
+              <p class="where"><strong>Jevi Austin International Company Ltd</strong>, Oando Project Site, Port Harcourt</p>
+              <p>Provided first-level technical support, explaining issues and fixes clearly to non-technical users and escalating complex cases. Installed and configured Windows 10/11, imaged systems, and set up Outlook and OneDrive for staff. Kept accurate daily logs and followed standard operating procedures. Diagnosed and replaced faulty hardware. Commended by supervisors for punctuality, willingness to learn, and attention to detail.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
             <span class="cert-date">August 2024 – October 2024</span>
-          </div>
-          <div class="cert-card">
-            <div class="cert-icon"><i class="fas fa-chalkboard-teacher"></i></div>
-            <h3>Peer Tutor</h3>
-            <p><strong>Elizade University</strong></p>
-            <p>Tutored first-year students in Cisco Packet Tracer and basic networking, breaking down technical topics into clear, step-by-step explanations.</p>
+            <div class="timeline-body">
+              <h3><i class="fas fa-shield-alt" aria-hidden="true"></i> IT Intern</h3>
+              <p class="where"><strong>Rewod Technologies</strong>, Port Harcourt</p>
+              <p>Three-month placement. Completed introductory training in cybersecurity and ethical hacking concepts, and gained basic awareness of phishing, social engineering, man-in-the-middle (MITM) attacks, malicious payloads, and common online threats.</p>
+            </div>
+          </li>
+          <li class="timeline-item">
             <span class="cert-date">Volunteer</span>
-          </div>
-        </div>
+            <div class="timeline-body">
+              <h3><i class="fas fa-chalkboard-teacher" aria-hidden="true"></i> Peer Tutor</h3>
+              <p class="where"><strong>Elizade University</strong></p>
+              <p>Tutored first-year students in Cisco Packet Tracer and basic networking, breaking down technical topics into clear, step-by-step explanations.</p>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
     <section id="projects" class="projects">
       <div class="container">
-        <h2 class="section-title">Featured Projects</h2>
-        <p class="section-subtitle">Simple, practical work you can try</p>
-        <div class="projects-grid">
-          <article class="project-card">
-            <div class="project-image"><i class="fas fa-comments"></i></div>
+        <header class="section-head">
+          <p class="section-index" aria-hidden="true">05</p>
+          <h2 class="section-title">Featured Projects</h2>
+          <p class="section-subtitle">Simple, practical work you can try</p>
+        </header>
+        <div class="filter-bar" role="group" aria-label="Filter projects">
+          <button type="button" class="chip is-active" data-filter="all" aria-pressed="true">All <span class="chip-count">6</span></button>
+          <button type="button" class="chip" data-filter="web" aria-pressed="false">Web <span class="chip-count">2</span></button>
+          <button type="button" class="chip" data-filter="android" aria-pressed="false">Android <span class="chip-count">1</span></button>
+          <button type="button" class="chip" data-filter="console" aria-pressed="false">Console games <span class="chip-count">3</span></button>
+        </div>
+        <ol class="project-list" id="project-list">
+          <li class="project-row" data-kind="android">
+            <span class="project-num" aria-hidden="true">01</span>
+            <div class="project-icon" aria-hidden="true"><i class="fas fa-comments"></i></div>
             <div class="project-content">
               <h3>TellMe</h3>
               <p>Location-based Android app for community information sharing. Final-year project with Kotlin, Jetpack Compose, and Firebase.</p>
-              <div class="project-tech">
-                <span>Kotlin</span><span>Jetpack Compose</span><span>Firebase</span>
-              </div>
-              <div class="project-links">
-                <a href="projects/tellme/" class="project-link"><i class="fas fa-external-link-alt"></i> Overview</a>
-              </div>
+              <div class="project-tech"><span>Kotlin</span><span>Jetpack Compose</span><span>Firebase</span></div>
             </div>
-          </article>
-
-
-          <article class="project-card">
-            <div class="project-image"><i class="fas fa-shopping-bag"></i></div>
+            <div class="project-links">
+              <a href="projects/tellme/" class="project-link">Overview <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+            </div>
+          </li>
+          <li class="project-row" data-kind="web">
+            <span class="project-num" aria-hidden="true">02</span>
+            <div class="project-icon" aria-hidden="true"><i class="fas fa-shopping-bag"></i></div>
             <div class="project-content">
               <h3>ShopFront</h3>
               <p>Responsive e-commerce storefront with catalog, search and filters, cart persistence, and a validated checkout UI demo.</p>
-              <div class="project-tech">
-                <span>HTML</span><span>CSS</span><span>JavaScript</span>
-              </div>
-              <div class="project-links">
-                <a href="projects/shopfront/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
-                <a href="https://github.com/Dave-4u/shopfront" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
-              </div>
+              <div class="project-tech"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
             </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-image"><i class="fas fa-wallet"></i></div>
+            <div class="project-links">
+              <a href="projects/shopfront/" class="project-link">Live <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <a href="https://github.com/Dave-4u/shopfront" class="project-link subtle" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Source</a>
+            </div>
+          </li>
+          <li class="project-row" data-kind="web">
+            <span class="project-num" aria-hidden="true">03</span>
+            <div class="project-icon" aria-hidden="true"><i class="fas fa-wallet"></i></div>
             <div class="project-content">
               <h3>Expense Tracker</h3>
               <p>Personal spending tracker with categories, monthly budgets, summary cards, and a category bar chart. Data persists in localStorage.</p>
-              <div class="project-tech">
-                <span>HTML</span><span>CSS</span><span>JavaScript</span>
-              </div>
-              <div class="project-links">
-                <a href="projects/expense-tracker/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
-                <a href="https://github.com/Dave-4u/expense-tracker" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
-              </div>
+              <div class="project-tech"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
             </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-image"><i class="fas fa-hand-rock"></i></div>
+            <div class="project-links">
+              <a href="projects/expense-tracker/" class="project-link">Live <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <a href="https://github.com/Dave-4u/expense-tracker" class="project-link subtle" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Source</a>
+            </div>
+          </li>
+          <li class="project-row" data-kind="console">
+            <span class="project-num" aria-hidden="true">04</span>
+            <div class="project-icon" aria-hidden="true"><i class="fas fa-hand-rock"></i></div>
             <div class="project-content">
               <h3>Rock Paper Scissors</h3>
               <p>Simple console-style game — rock, paper, or scissors against the computer, with score tracking.</p>
-              <div class="project-tech">
-                <span>C#</span><span>Console</span>
-              </div>
-              <div class="project-links">
-                <a href="projects/rock-paper-scissors/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
-                <a href="https://github.com/Dave-4u/csharp-rock-paper-scissors" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
-              </div>
+              <div class="project-tech"><span>C#</span><span>Console</span></div>
             </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-image"><i class="fab fa-python"></i></div>
+            <div class="project-links">
+              <a href="projects/rock-paper-scissors/" class="project-link">Live <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <a href="https://github.com/Dave-4u/csharp-rock-paper-scissors" class="project-link subtle" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Source</a>
+            </div>
+          </li>
+          <li class="project-row" data-kind="console">
+            <span class="project-num" aria-hidden="true">05</span>
+            <div class="project-icon" aria-hidden="true"><i class="fab fa-python"></i></div>
             <div class="project-content">
               <h3>Number Guessing (Python)</h3>
               <p>Guess a random number from 1 to 100. The program says too high or too low until you get it.</p>
-              <div class="project-tech">
-                <span>Python</span><span>Console</span>
-              </div>
-              <div class="project-links">
-                <a href="projects/number-guessing/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
-                <a href="https://github.com/Dave-4u/python-number-guessing" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
-              </div>
+              <div class="project-tech"><span>Python</span><span>Console</span></div>
             </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-image"><i class="fab fa-java"></i></div>
+            <div class="project-links">
+              <a href="projects/number-guessing/" class="project-link">Live <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <a href="https://github.com/Dave-4u/python-number-guessing" class="project-link subtle" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Source</a>
+            </div>
+          </li>
+          <li class="project-row" data-kind="console">
+            <span class="project-num" aria-hidden="true">06</span>
+            <div class="project-icon" aria-hidden="true"><i class="fab fa-java"></i></div>
             <div class="project-content">
               <h3>Number Guessing (Java)</h3>
               <p>Same number guessing game in Java — Scanner input, Random secret, and a simple loop.</p>
-              <div class="project-tech">
-                <span>Java</span><span>Console</span>
-              </div>
-              <div class="project-links">
-                <a href="projects/number-guessing/" class="project-link"><i class="fas fa-external-link-alt"></i> Live</a>
-                <a href="https://github.com/Dave-4u/java-number-guessing" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Source</a>
-              </div>
+              <div class="project-tech"><span>Java</span><span>Console</span></div>
             </div>
-          </article>
-        </div>
+            <div class="project-links">
+              <a href="projects/number-guessing/" class="project-link">Live <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+              <a href="https://github.com/Dave-4u/java-number-guessing" class="project-link subtle" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i> Source</a>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
     <section id="contact" class="contact">
-      <div class="container">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="contact-content">
-          <div class="contact-info">
-            <h3>Let's Connect</h3>
-            <p>Based in Port Harcourt, Nigeria. Available for full-time, remote, freelance, and contract roles in AI training, data annotation, response evaluation, research, and virtual assistance.</p>
-            <div class="contact-item">
-              <i class="fas fa-envelope"></i>
+      <div class="container contact-grid">
+        <div class="contact-info">
+          <header class="section-head">
+            <p class="section-index" aria-hidden="true">06</p>
+            <h2 class="section-title">Get In Touch</h2>
+          </header>
+          <h3>Let's Connect</h3>
+          <p>Based in Port Harcourt, Nigeria. Available for full-time, remote, freelance, and contract roles in AI training, data annotation, response evaluation, research, and virtual assistance.</p>
+          <ul class="contact-items">
+            <li class="contact-item">
+              <i class="fas fa-envelope" aria-hidden="true"></i>
               <a href="mailto:adegborodamilaredavid@gmail.com">adegborodamilaredavid@gmail.com</a>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-phone"></i>
+              <button type="button" class="copy-btn" data-copy="adegborodamilaredavid@gmail.com" aria-label="Copy email address">Copy</button>
+            </li>
+            <li class="contact-item">
+              <i class="fas fa-phone" aria-hidden="true"></i>
               <a href="tel:+2348101597428">+234 810 159 7428</a>
-            </div>
-            <div class="contact-item">
-              <i class="fas fa-map-marker-alt"></i>
+              <button type="button" class="copy-btn" data-copy="+2348101597428" aria-label="Copy phone number">Copy</button>
+            </li>
+            <li class="contact-item">
+              <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
               <span>Port Harcourt, Nigeria</span>
-            </div>
-          </div>
-          <form class="contact-form" id="contact-form" action="mailto:adegborodamilaredavid@gmail.com" method="get" enctype="text/plain">
-            <div class="form-group">
-              <input type="text" name="name" id="contact-name" placeholder="Your Name" required />
-            </div>
-            <div class="form-group">
-              <input type="email" name="email" id="contact-email" placeholder="Your Email" required />
-            </div>
-            <div class="form-group">
-              <input type="text" name="subject" id="contact-subject" placeholder="Subject" required />
-            </div>
-            <div class="form-group">
-              <textarea name="body" id="contact-message" placeholder="Your Message" rows="5" required></textarea>
-            </div>
-            <button type="submit" class="submit-btn">
-              <i class="fas fa-paper-plane"></i> Send Message
-            </button>
-          </form>
+            </li>
+          </ul>
         </div>
+        <form class="contact-form" id="contact-form" action="mailto:adegborodamilaredavid@gmail.com" method="get" enctype="text/plain" novalidate>
+          <p class="form-note">This opens your email app with the message filled in. Nothing is stored on this site.</p>
+          <div class="form-group">
+            <label for="contact-name">Your Name</label>
+            <input type="text" name="name" id="contact-name" autocomplete="name" required />
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Your Email</label>
+            <input type="email" name="email" id="contact-email" autocomplete="email" required />
+          </div>
+          <div class="form-group">
+            <label for="contact-subject">Subject</label>
+            <input type="text" name="subject" id="contact-subject" required />
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Your Message <span class="char-count" id="char-count" aria-live="polite"></span></label>
+            <textarea name="body" id="contact-message" rows="5" required></textarea>
+          </div>
+          <p class="form-error" id="form-error" role="alert"></p>
+          <button type="submit" class="btn btn-primary submit-btn"><i class="fas fa-paper-plane" aria-hidden="true"></i> Send Message</button>
+        </form>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-left">
-          <div class="footer-logo">
-            <i class="fas fa-code"></i>
-            <span>Adegboro David</span>
-          </div>
-          <p>AI Trainer · Data Annotator · AI Response Evaluator · Research &amp; Virtual Assistant. B.Sc. Computer Science (Second Class Upper, 2026).</p>
-        </div>
-        <div class="footer-right">
-          <div class="footer-social">
-            <a href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/adegboro-david-76a06a430/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:adegborodamilaredavid@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-          </div>
-        </div>
+    <div class="container footer-content">
+      <div class="footer-left">
+        <div class="footer-logo"><span class="logo-mark" aria-hidden="true">D</span> <span>Adegboro David</span></div>
+        <p>AI Trainer · Data Annotator · AI Response Evaluator · Research &amp; Virtual Assistant. B.Sc. Computer Science (Second Class Upper, 2026).</p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; <span id="year"></span> Adegboro David Oluwadamilare. All rights reserved.</p>
+      <div class="footer-right">
+        <div class="footer-social">
+          <a href="https://github.com/Dave-4u" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/adegboro-david-76a06a430/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+          <a href="mailto:adegborodamilaredavid@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+        </div>
+        <button type="button" class="kbd-hint" id="kbd-open">Press <kbd>?</kbd> for keyboard shortcuts</button>
       </div>
     </div>
+    <div class="container footer-bottom">
+      <p>&copy; <span id="year"></span> Adegboro David Oluwadamilare. All rights reserved.</p>
+    </div>
   </footer>
+
+  <dialog class="kbd-dialog" id="kbd-dialog" aria-labelledby="kbd-title">
+    <h2 id="kbd-title">Keyboard shortcuts</h2>
+    <dl>
+      <div><dt><kbd>1</kbd>–<kbd>6</kbd></dt><dd>Jump to a section</dd></div>
+      <div><dt><kbd>T</kbd></dt><dd>Toggle light / dark</dd></div>
+      <div><dt><kbd>C</kbd></dt><dd>Copy my email</dd></div>
+      <div><dt><kbd>?</kbd></dt><dd>Show this list</dd></div>
+      <div><dt><kbd>Esc</kbd></dt><dd>Close</dd></div>
+    </dl>
+    <form method="dialog"><button class="btn btn-ghost" type="submit">Got it</button></form>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="js/main.js"></script>
 </body>

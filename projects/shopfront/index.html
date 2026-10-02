@@ -7,7 +7,9 @@
   <title>ShopFront · Online Store</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <meta name="theme-color" content="#1d3bbf" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -18,10 +20,11 @@
       <a class="logo" href="#" data-view="shop">Shop<span>Front</span></a>
       <div class="header-search">
         <label class="sr-only" for="search-input">Search products</label>
-        <input id="search-input" type="search" placeholder="Search products…" autocomplete="off" />
+        <input id="search-input" type="search" placeholder="Search mugs, hoodies, lamps…" autocomplete="off" />
+        <kbd class="search-kbd" aria-hidden="true">/</kbd>
       </div>
       <nav class="header-actions" aria-label="Store">
-        <button type="button" class="icon-btn" id="cart-toggle" aria-label="Open cart">
+        <button type="button" class="icon-btn cart-btn" id="cart-toggle" aria-label="Open bag" title="Open bag (B)">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
             <path d="M6 6h15l-1.5 9h-12z" />
             <circle cx="9" cy="20" r="1.5" />
@@ -37,10 +40,18 @@
   <main id="main">
     <section class="hero-banner">
       <div class="container hero-banner-inner">
-        <div>
-          <p class="eyebrow">Curated everyday essentials</p>
-          <h1>Shop smarter. Look sharper.</h1>
-          <p class="hero-text">Browse a demo catalog of apparel, gadgets, and home goods. Add items to your cart and walk through a mock checkout — no real payments.</p>
+        <div class="hero-copy">
+          <p class="eyebrow">A small concept store · Lekki, Lagos <span class="demo-tag">demo</span></p>
+          <h1>Good basics, <span class="squiggle">honestly priced.</span></h1>
+          <p class="hero-text">Twelve things we'd actually use every day. Add a few to your bag and walk through checkout. It's a demo, so no card is ever charged.</p>
+          <div class="hero-perks">
+            <span><b>Free delivery</b> over ₦50,000</span>
+            <span><b>Pay on delivery</b> in Lagos</span>
+            <span><b>7-day</b> easy returns</span>
+          </div>
+        </div>
+        <div class="hero-stack" aria-hidden="true">
+          <div class="stack-card s1"><svg viewBox="0 0 80 80"><path d="M18 26h36v26a10 10 0 0 1-10 10H28a10 10 0 0 1-10-10z"/><path d="M54 32h4a6 6 0 0 1 0 12h-4M28 14c0 4 4 4 4 8M38 14c0 4 4 4 4 8"/></svg></div><div class="stack-card s2"><svg viewBox="0 0 80 80"><path d="M32 10h16v8l4 6v40a4 4 0 0 1-4 4H32a4 4 0 0 1-4-4V24l4-6z"/><path d="M28 34h24M28 52h24"/></svg></div><div class="stack-card s3"><svg viewBox="0 0 80 80"><path d="M22 14l10-6h16l10 6 8 12-10 6-4-4v34H28V28l-4 4-10-6z"/><path d="M34 8c2 5 10 5 12 0"/></svg></div>
         </div>
       </div>
     </section>
@@ -62,7 +73,7 @@
 
       <div class="catalog">
         <div class="product-grid" id="product-grid"></div>
-        <p class="empty-state" id="empty-catalog" hidden>No products match your filters.</p>
+        <div class="empty-state" id="empty-catalog" hidden><p><strong>Nothing matches that.</strong> Try a shorter search or another category.</p><button type="button" class="btn btn-ghost btn-sm" id="clear-filters">Clear filters</button></div>
       </div>
     </section>
 
@@ -123,14 +134,14 @@
           </fieldset>
           <fieldset>
             <legend>Payment (demo)</legend>
-            <p class="hint">This is a UI demo — no card data is sent or charged.</p>
+            <p class="hint">Demo only. Nothing you type here leaves your browser. Try 4242 4242 4242 4242.</p>
             <div class="field">
               <label for="card-name">Name on card</label>
               <input id="card-name" name="cardName" type="text" required autocomplete="cc-name" />
               <span class="field-error" data-for="cardName"></span>
             </div>
             <div class="field">
-              <label for="card-number">Card number</label>
+              <label for="card-number">Card number <span class="card-brand" id="card-brand" aria-live="polite"></span></label>
               <input id="card-number" name="cardNumber" type="text" inputmode="numeric" required placeholder="4242 4242 4242 4242" autocomplete="cc-number" />
               <span class="field-error" data-for="cardNumber"></span>
             </div>
@@ -176,11 +187,15 @@
     <div class="cart-backdrop" id="cart-backdrop"></div>
     <aside class="cart-panel" role="dialog" aria-modal="true" aria-labelledby="cart-title">
       <div class="cart-header">
-        <h2 id="cart-title">Your cart</h2>
+        <h2 id="cart-title">Your bag</h2>
         <button type="button" class="icon-btn" id="cart-close" aria-label="Close cart">×</button>
       </div>
       <div class="cart-body" id="cart-body"></div>
       <div class="cart-footer" id="cart-footer">
+        <div class="ship-nudge" id="ship-nudge" hidden>
+          <p class="ship-text"></p>
+          <div class="ship-track"><div class="ship-fill"></div></div>
+        </div>
         <div class="cart-total-row">
           <span>Subtotal</span>
           <strong id="cart-subtotal">₦0</strong>
@@ -200,10 +215,12 @@
 
   <footer class="site-footer">
     <div class="container footer-inner">
-      <p>ShopFront demo · HTML, CSS &amp; JavaScript</p>
-      <p>Prices in Nigerian Naira (₦) for display only</p>
+      <p><strong>ShopFront</strong> is a portfolio demo by <a href="https://dave-4u.github.io/">Dave Adegboro</a>. Prices in Naira, for show.</p>
+      <p class="shortcuts"><kbd>/</kbd> search · <kbd>B</kbd> bag · <kbd>Esc</kbd> close</p>
     </div>
   </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
   <script src="app.js"></script>
 </body>

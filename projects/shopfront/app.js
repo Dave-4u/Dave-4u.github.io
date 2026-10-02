@@ -115,6 +115,28 @@
     }
   ];
 
+  var ART = {
+    "tee-01": { tint: "#f6d9c4", path: '<path d="M22 14l10-6h16l10 6 8 12-10 6-4-4v34H28V28l-4 4-10-6z"/><path d="M34 8c2 5 10 5 12 0"/>' },
+    "hoodie-02": { tint: "#d9e2f5", path: '<path d="M24 20c0-8 7-12 16-12s16 4 16 12l10 10-8 8-4-4v30H26V34l-4 4-8-8z"/><path d="M32 18c2 6 14 6 16 0M34 52h12v8H34z"/>' },
+    "sneaker-03": { tint: "#e4f0d8", path: '<path d="M10 52V40l14-12 8 8 6-2 26 12c4 2 6 4 6 8v2H10z"/><path d="M10 52h60M30 38l4 4M36 36l4 4"/>' },
+    "cap-04": { tint: "#f3e6c6", path: '<path d="M14 46c0-14 10-24 24-24s24 10 24 24z"/><path d="M14 46h52c4 0 6 2 4 4H10M38 22v-4"/>' },
+    "bag-05": { tint: "#f5d8d8", path: '<path d="M18 28h44l-4 38H22z"/><path d="M30 28v-6a10 10 0 0 1 20 0v6"/>' },
+    "watch-06": { tint: "#e6e1f2", path: '<circle cx="40" cy="40" r="14"/><path d="M34 26l2-14h8l2 14M34 54l2 14h8l2-14M40 32v8l5 4"/>' },
+    "buds-07": { tint: "#d6eef0", path: '<path d="M24 22a8 8 0 0 1 8 8v8a8 8 0 0 1-8 0zM56 22a8 8 0 0 0-8 8v8a8 8 0 0 0 8 0z"/><path d="M24 38v20M56 38v20M30 62h20"/>' },
+    "lamp-08": { tint: "#f7ecc8", path: '<path d="M22 66h28M36 66V44l14-16"/><path d="M44 18l18 10-6 8-18-10z"/><path d="M50 40c2 4 6 4 8 2"/>' },
+    "mug-09": { tint: "#efe0d2", path: '<path d="M18 26h36v26a10 10 0 0 1-10 10H28a10 10 0 0 1-10-10z"/><path d="M54 32h4a6 6 0 0 1 0 12h-4M28 14c0 4 4 4 4 8M38 14c0 4 4 4 4 8"/>' },
+    "bottle-10": { tint: "#d8ecdf", path: '<path d="M32 10h16v8l4 6v40a4 4 0 0 1-4 4H32a4 4 0 0 1-4-4V24l4-6z"/><path d="M28 34h24M28 52h24"/>' },
+    "keyboard-11": { tint: "#e2e4e8", path: '<rect x="8" y="26" width="64" height="30" rx="4"/><path d="M16 34h4M26 34h4M36 34h4M46 34h4M56 34h4M16 42h4M26 42h4M36 42h4M46 42h4M56 42h4M24 50h32"/>' },
+    "jeans-12": { tint: "#d5dff0", path: '<path d="M24 10h32l4 58H46l-6-34-6 34H20z"/><path d="M24 18h32M40 18v14"/>' }
+  };
+
+  function art(p, cls) {
+    var a = ART[p.id] || { tint: "#eee", path: "" };
+    return '<span class="art ' + (cls || "") + '" style="--tint:' + a.tint + '"><svg viewBox="0 0 80 80" aria-hidden="true" focusable="false">' + a.path + "</svg></span>";
+  }
+
+  var FREE_SHIPPING_AT = 50000;
+
   var state = {
     category: "All",
     query: "",
@@ -199,6 +221,24 @@
     }, 0);
   }
 
+  function shippingFor(subtotal) {
+    if (!subtotal) return 0;
+    return subtotal >= FREE_SHIPPING_AT ? 0 : SHIPPING_FLAT;
+  }
+
+  function renderShippingNudge() {
+    var sub = cartSubtotal();
+    var el = document.getElementById("ship-nudge");
+    if (!el) return;
+    if (!sub) { el.hidden = true; return; }
+    el.hidden = false;
+    var pct = Math.min(100, Math.round((sub / FREE_SHIPPING_AT) * 100));
+    el.querySelector(".ship-fill").style.width = pct + "%";
+    el.querySelector(".ship-text").textContent = sub >= FREE_SHIPPING_AT
+      ? "Nice — delivery is on us."
+      : formatNaira(FREE_SHIPPING_AT - sub) + " more for free delivery.";
+  }
+
   function categories() {
     var set = {};
     PRODUCTS.forEach(function (p) { set[p.category] = true; });
@@ -238,14 +278,14 @@
 
   function renderCatalog() {
     var list = filteredProducts();
-    els.resultCount.textContent = list.length + " product" + (list.length === 1 ? "" : "s");
+    els.resultCount.textContent = list.length ? "Showing " + list.length + " of " + PRODUCTS.length : "Nothing here";
     els.empty.hidden = list.length > 0;
     els.grid.innerHTML = list
       .map(function (p) {
         return (
           '<article class="product-card" data-id="' + p.id + '">' +
             '<button type="button" class="product-media" data-open="' + p.id + '" aria-label="View ' + escapeHtml(p.name) + '">' +
-              p.emoji +
+              art(p) +
             "</button>" +
             '<div class="product-body">' +
               '<p class="product-category">' + escapeHtml(p.category) + "</p>" +
@@ -273,9 +313,10 @@
     renderCartBadge();
     els.cartSubtotal.textContent = formatNaira(cartSubtotal());
     els.goCheckout.disabled = items.length === 0;
+    renderShippingNudge();
 
     if (!items.length) {
-      els.cartBody.innerHTML = '<p class="cart-empty">Your cart is empty. Add something you like.</p>';
+      els.cartBody.innerHTML = '<div class="cart-empty"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M18 28h44l-4 38H22z"/><path d="M30 28v-6a10 10 0 0 1 20 0v6"/></svg><p><strong>Your bag is empty.</strong><br>Have a look around — the mugs are a crowd favourite.</p><button type="button" class="btn btn-ghost btn-sm" data-close-cart>Keep browsing</button></div>';
       return;
     }
 
@@ -284,7 +325,7 @@
         var p = item.product;
         return (
           '<div class="cart-item" data-cart-id="' + p.id + '">' +
-            '<div class="cart-thumb" aria-hidden="true">' + p.emoji + "</div>" +
+            '<div class="cart-thumb" aria-hidden="true">' + art(p, "art-sm") + "</div>" +
             "<div>" +
               "<h3>" + escapeHtml(p.name) + "</h3>" +
               "<p>" + formatNaira(p.price) + "</p>" +
@@ -307,7 +348,7 @@
   function renderCheckoutSummary() {
     var items = cartEntries();
     var subtotal = cartSubtotal();
-    var shipping = items.length ? SHIPPING_FLAT : 0;
+    var shipping = shippingFor(subtotal);
     els.checkoutLines.innerHTML = items
       .map(function (item) {
         return (
@@ -322,13 +363,14 @@
       })
       .join("");
     els.checkoutSubtotal.textContent = formatNaira(subtotal);
-    els.checkoutShipping.textContent = formatNaira(shipping);
+    els.checkoutShipping.textContent = subtotal && !shipping ? "Free" : formatNaira(shipping);
     els.checkoutTotal.textContent = formatNaira(subtotal + shipping);
   }
 
   function openCart() {
     els.cartDrawer.hidden = false;
     document.body.style.overflow = "hidden";
+    setTimeout(function () { els.cartClose.focus(); }, 30);
   }
 
   function closeCart() {
@@ -342,7 +384,7 @@
     state.activeProductId = productId;
     els.modalContent.innerHTML =
       '<div class="modal-layout">' +
-        '<div class="modal-media" aria-hidden="true">' + product.emoji + "</div>" +
+        '<div class="modal-media" aria-hidden="true">' + art(product, "art-lg") + "</div>" +
         "<div>" +
           '<p class="modal-meta">' + escapeHtml(product.category) + "</p>" +
           '<h2 id="modal-title">' + escapeHtml(product.name) + "</h2>" +
@@ -369,6 +411,7 @@
     els.successView.hidden = view !== "success";
     closeCart();
     closeModal();
+    var tEl = document.getElementById("toast"); if (tEl) tEl.classList.remove("show");
     if (view === "checkout") renderCheckoutSummary();
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -447,10 +490,40 @@
     if (!/^\d{3,4}$/.test(data.cardCvc)) { showError("cardCvc", "Enter 3–4 digits."); ok = false; }
     if (!cartEntries().length) { ok = false; }
 
+    if (!ok) {
+      var firstBad = els.checkoutForm.querySelector(".invalid");
+      if (firstBad) firstBad.focus();
+    }
     return ok ? data : null;
   }
 
+  var toastTimer;
+  function toast(html) {
+    var el = document.getElementById("toast");
+    el.innerHTML = html;
+    el.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.classList.remove("show"); }, 3200);
+  }
+
+  function feedbackAdded(btn, id) {
+    var p = PRODUCTS.find(function (x) { return x.id === id; });
+    var label = btn.textContent;
+    btn.classList.add("added");
+    btn.textContent = "Added ✓";
+    setTimeout(function () { btn.classList.remove("added"); btn.textContent = label; }, 1200);
+    els.cartToggle.classList.remove("bump");
+    void els.cartToggle.offsetWidth;
+    els.cartToggle.classList.add("bump");
+    if (!els.modal.hidden) closeModal();
+    toast("<span><strong>" + escapeHtml(p.name) + "</strong> is in your bag.</span>" +
+      '<button type="button" id="toast-view">View bag</button>');
+    var v = document.getElementById("toast-view");
+    if (v) v.addEventListener("click", function () { document.getElementById("toast").classList.remove("show"); openCart(); });
+  }
+
   function onClick(e) {
+    if (e.target.closest("[data-close-cart]")) { closeCart(); return; }
     var t = e.target.closest("[data-category], [data-add], [data-open], [data-qty-inc], [data-qty-dec], [data-remove], [data-view]");
     if (!t) return;
 
@@ -461,8 +534,9 @@
       return;
     }
     if (t.hasAttribute("data-add")) {
-      addToCart(t.getAttribute("data-add"));
-      openCart();
+      var addId = t.getAttribute("data-add");
+      addToCart(addId);
+      feedbackAdded(t, addId);
       return;
     }
     if (t.hasAttribute("data-open")) {
@@ -502,6 +576,11 @@
     renderCatalog();
   });
 
+  document.getElementById("clear-filters").addEventListener("click", function () {
+    state.query = ""; state.category = "All"; els.search.value = "";
+    renderCategories(); renderCatalog(); els.search.focus();
+  });
+
   els.search.addEventListener("input", function () {
     state.query = els.search.value;
     renderCatalog();
@@ -539,11 +618,30 @@
     setView("success");
   });
 
+  var cardInput = els.checkoutForm.elements.cardNumber;
+  cardInput.addEventListener("input", function () {
+    var digits = cardInput.value.replace(/\D/g, "").slice(0, 19);
+    cardInput.value = digits.replace(/(.{4})/g, "$1 ").trim();
+    var brand = /^4/.test(digits) ? "Visa" : /^5[1-5]/.test(digits) ? "Mastercard" : /^5061|^650/.test(digits) ? "Verve" : "";
+    document.getElementById("card-brand").textContent = brand;
+  });
+  var expInput = els.checkoutForm.elements.cardExpiry;
+  expInput.addEventListener("input", function (e) {
+    var d = expInput.value.replace(/\D/g, "").slice(0, 4);
+    expInput.value = d.length > 2 ? d.slice(0, 2) + "/" + d.slice(2) : d;
+  });
+
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
       closeModal();
       closeCart();
+      return;
     }
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var tag = (e.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea" || tag === "select") return;
+    if (e.key === "/") { e.preventDefault(); els.search.focus(); }
+    else if (e.key === "b" || e.key === "B") { openCart(); }
   });
 
   renderCategories();
